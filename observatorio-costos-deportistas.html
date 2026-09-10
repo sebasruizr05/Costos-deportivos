@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuánto cuesta competir · Medellín</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papel:#EFF1EE; --panel:#FFFFFF; --tinta:#16242B; --suave:#5C6E72;
+  --cancha:#1E6F4F; --agua:#1D5C8C; --senal:#E0A100; --alerta:#BE4128;
+  --linea:#CBD4D0; --linea2:#E3E8E4;
+  --sans:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--papel);color:var(--tinta);font-family:var(--sans);
+  font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.08}
+p{margin:0 0 .85em}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--agua);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* cabecera */
+header.top{background:var(--tinta);color:#EFF1EE;padding:20px 22px 16px}
+header.top .marca{font-size:12px;letter-spacing:.06em;color:#9FB3B0;margin-bottom:6px}
+header.top h1{font-size:clamp(26px,5.4vw,40px);max-width:16ch}
+header.top .sub{font-family:var(--serif);color:#B8C7C4;font-size:15px;margin-top:8px;max-width:60ch}
+.estado{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:#9FB3B0}
+.estado b{color:#EFF1EE;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* navegación de módulos */
+nav.mod{position:sticky;top:0;z-index:20;background:var(--papel);
+  border-bottom:1px solid var(--linea);overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav.mod ul{display:flex;gap:0;margin:0;padding:0 12px;list-style:none;min-width:max-content}
+nav.mod button{background:none;border:0;padding:14px 14px 11px;color:var(--suave);
+  font-weight:500;border-bottom:3px solid transparent;white-space:nowrap}
+nav.mod button[aria-current="true"]{color:var(--tinta);border-bottom-color:var(--cancha);font-weight:600}
+nav.mod button:disabled{opacity:.35;cursor:not-allowed}
+
+main{padding:22px 22px 90px;max-width:1120px;margin:0 auto}
+section.vista{display:none}
+section.vista.activa{display:block}
+h2.tit{font-size:22px;margin-bottom:4px}
+.desc{font-family:var(--serif);color:var(--suave);max-width:70ch;margin-bottom:20px}
+
+/* piezas */
+.tarjeta{background:var(--panel);border:1px solid var(--linea2);border-radius:4px;padding:18px;margin-bottom:16px}
+.tarjeta h3{font-size:15px;font-weight:600;letter-spacing:0;margin-bottom:10px}
+.rejilla{display:grid;gap:14px}
+@media(min-width:720px){.rejilla.dos{grid-template-columns:1fr 1fr}
+  .rejilla.tres{grid-template-columns:repeat(3,1fr)}}
+.cifra{background:var(--panel);border:1px solid var(--linea2);border-left:4px solid var(--cancha);
+  border-radius:3px;padding:14px 16px}
+.cifra .n{font-size:clamp(22px,4vw,30px);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.cifra .l{font-size:13px;color:var(--suave);margin-top:3px;line-height:1.35}
+.cifra.agua{border-left-color:var(--agua)} .cifra.senal{border-left-color:var(--senal)}
+.cifra.alerta{border-left-color:var(--alerta)}
+
+.btn{background:var(--tinta);color:#fff;border:0;border-radius:3px;padding:11px 18px;font-weight:600}
+.btn:disabled{background:var(--linea);color:var(--suave);cursor:not-allowed}
+.btn.sec{background:none;color:var(--tinta);border:1px solid var(--linea)}
+.btn.mini{padding:7px 12px;font-size:14px}
+.fila{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+label.campo{display:block;font-size:13px;color:var(--suave);margin-bottom:5px;font-weight:500}
+input[type=text],input[type=number],select,textarea{width:100%;font-family:inherit;font-size:16px;
+  padding:9px 11px;border:1px solid var(--linea);border-radius:3px;background:#fff;color:var(--tinta)}
+textarea{font-family:var(--serif);line-height:1.5}
+.control{margin-bottom:14px}
+
+.soltar{border:2px dashed var(--linea);border-radius:5px;padding:34px 20px;text-align:center;background:var(--panel)}
+.soltar.encima{border-color:var(--cancha);background:#EAF3EE}
+.soltar p{font-family:var(--serif);color:var(--suave);max-width:46ch;margin:8px auto 16px}
+
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:8px 10px;border-bottom:1px solid var(--linea2);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+thead th{font-size:12px;color:var(--suave);font-weight:600;border-bottom:1px solid var(--linea)}
+tbody tr:hover{background:#F7F9F7}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.marca-nivel{display:inline-block;padding:2px 8px;border-radius:2px;font-size:12px;font-weight:600}
+.n-baja{background:#E4F0E9;color:#1E6F4F} .n-moderada{background:#FBF0D2;color:#8A6400}
+.n-alta{background:#FBE2D8;color:#A33A22} .n-critica{background:#BE4128;color:#fff}
+
+.narrativa{font-family:var(--serif);font-size:17.5px;line-height:1.62;max-width:72ch}
+.narrativa .lede{font-size:20px;font-weight:600;line-height:1.4;margin-bottom:14px}
+.narrativa h4{font-family:var(--sans);font-size:14px;font-weight:600;margin:22px 0 8px}
+.narrativa em{background:#FBF0D2;font-style:normal;padding:0 3px}
+
+.aviso{border-left:3px solid var(--senal);background:#FBF7EA;padding:11px 14px;font-size:14px;
+  font-family:var(--serif);margin-bottom:14px}
+.aviso.mal{border-left-color:var(--alerta);background:#FBEFEB}
+.mapeo{display:grid;grid-template-columns:1fr;gap:8px;font-size:14px}
+@media(min-width:760px){.mapeo{grid-template-columns:1fr 1fr}}
+.mapeo .par{display:flex;gap:8px;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--linea2);padding:5px 0}
+.mapeo .par span{color:var(--suave);flex:0 0 46%}
+.mapeo .par select{flex:1;font-size:14px;padding:6px 8px}
+.mapeo .par.sin select{border-color:var(--alerta)}
+svg.gr{width:100%;height:auto;display:block;font-family:var(--sans)}
+.leyenda{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--suave);margin-top:8px}
+.leyenda i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+.vacio{font-family:var(--serif);color:var(--suave);padding:26px 0;max-width:52ch}
+.cita{font-family:var(--serif);font-size:15.5px;border-left:3px solid var(--linea);padding-left:14px;
+  margin:0 0 14px;color:#33454A}
+.cita cite{display:block;font-style:normal;font-size:13px;color:var(--suave);margin-top:5px;font-family:var(--sans)}
+.chip{display:inline-flex;align-items:center;gap:6px;background:#E7ECE8;border-radius:14px;
+  padding:4px 11px;font-size:13px;margin:0 6px 6px 0}
+.carga{position:relative;height:7px;background:var(--linea2);border-radius:4px;overflow:hidden;margin-top:6px}
+.carga i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--cancha)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="marca">Instrumento de investigación · INDER 2022–2025</div>
+  <h1>Cuánto cuesta competir</h1>
+  <div class="sub">Encuesta a deportistas de Medellín y sus familias, analizada de punta a punta:
+    descriptivos, comparaciones entre comunas y deportes, proyecciones y redacción de hallazgos.</div>
+  <div class="estado" id="estado">
+    <span>Sin datos cargados</span>
+  </div>
+</header>
+
+<nav class="mod" aria-label="Módulos de análisis">
+  <ul>
+    <li><button data-v="datos" aria-current="true">Datos</button></li>
+    <li><button data-v="panorama" disabled>Panorama</button></li>
+    <li><button data-v="descriptivos" disabled>Descriptivos</button></li>
+    <li><button data-v="comparar" disabled>Comparar</button></li>
+    <li><button data-v="relaciones" disabled>Relaciones</button></li>
+    <li><button data-v="proyeccion" disabled>Proyección</button></li>
+    <li><button data-v="diagnostico" disabled>Diagnóstico</button></li>
+    <li><button data-v="voces" disabled>Voces</button></li>
+    <li><button data-v="informe" disabled>Informe</button></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ DATOS ============ -->
+<section class="vista activa" id="v-datos">
+  <h2 class="tit">Traer las respuestas</h2>
+  <p class="desc">Vincula el formulario a una hoja de cálculo, publícala como CSV y pega el enlace:
+    cada vez que abras esta página verás las respuestas nuevas. Si prefieres no publicar nada,
+    descarga el CSV desde Google Forms y suéltalo aquí.</p>
+
+  <div class="tarjeta">
+    <h3>Enlace de la hoja publicada</h3>
+    <div class="control">
+      <input type="text" id="urlHoja" placeholder="https://docs.google.com/spreadsheets/d/e/…/pub?output=csv">
+    </div>
+    <div class="fila">
+      <button class="btn" id="btnUrl">Cargar desde el enlace</button>
+      <button class="btn sec mini" id="btnRecordar">Recordar este enlace</button>
+      <span id="msgUrl" style="font-size:13px;color:var(--suave)"></span>
+    </div>
+    <p style="font-size:13px;color:var(--suave);margin:12px 0 0;font-family:var(--serif)">
+      En la hoja: Archivo › Compartir › Publicar en la web › hoja de respuestas › formato CSV.</p>
+  </div>
+
+  <div class="soltar" id="soltar">
+    <strong>Suelta aquí el CSV de respuestas</strong>
+    <p>También puedes pegar el contenido del archivo o probar el aplicativo con datos simulados
+       mientras llegan las respuestas reales.</p>
+    <div class="fila" style="justify-content:center">
+      <button class="btn" id="btnArchivo">Elegir archivo</button>
+      <button class="btn sec" id="btnPegar">Pegar texto</button>
+      <button class="btn sec" id="btnDemo">Cargar datos simulados</button>
+    </div>
+    <input type="file" id="archivo" accept=".csv,.tsv,text/csv" hidden>
+  </div>
+
+  <div class="tarjeta" id="cajaPegar" hidden>
+    <h3>Pegar el CSV</h3>
+    <div class="control"><textarea id="areaPegar" rows="7" placeholder="Marca de temporal,Edad,…"></textarea></div>
+    <button class="btn" id="btnLeerPegado">Leer</button>
+  </div>
+
+  <div id="zonaMapeo" hidden>
+    <div class="tarjeta">
+      <h3>Revisar el mapeo de columnas</h3>
+      <div class="aviso" id="avisoMapeo"></div>
+      <div class="mapeo" id="mapeo"></div>
+      <div class="fila" style="margin-top:16px">
+        <button class="btn" id="btnProcesar">Procesar respuestas</button>
+        <button class="btn sec mini" id="btnAuto">Volver a detectar</button>
+      </div>
+    </div>
+    <div class="tarjeta">
+      <h3>Primeras filas del archivo</h3>
+      <div class="scroll" id="previa"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PANORAMA ============ -->
+<section class="vista" id="v-panorama">
+  <h2 class="tit">Panorama</h2>
+  <p class="desc">Lo primero que diría un reportero al mirar estos datos.</p>
+  <div class="tarjeta"><div class="narrativa" id="lede"></div></div>
+  <div class="rejilla tres" id="cifrasClave"></div>
+  <div class="tarjeta"><h3>Composición del gasto anual</h3><div id="grComposicion"></div></div>
+  <div class="tarjeta"><h3>Distribución del costo anual por deportista</h3><div id="grHistoPan"></div></div>
+</section>
+
+<!-- ============ DESCRIPTIVOS ============ -->
+<section class="vista" id="v-descriptivos">
+  <h2 class="tit">Descriptivos</h2>
+  <p class="desc">Media, mediana, desviación estándar, cuartiles e intervalo de confianza de cada rubro.
+    El coeficiente de variación indica qué tan desigual es ese gasto entre deportistas.</p>
+  <div class="tarjeta">
+    <div class="control" style="max-width:420px">
+      <label class="campo" for="selVar">Variable a examinar</label>
+      <select id="selVar"></select>
+    </div>
+    <div class="rejilla dos">
+      <div><div id="grHisto"></div><div class="leyenda"><span><i style="background:var(--agua)"></i>Observado</span><span><i style="background:var(--alerta)"></i>Curva normal teórica</span></div></div>
+      <div><div id="grCaja"></div></div>
+    </div>
+    <div id="lecturaVar" class="narrativa" style="margin-top:16px;font-size:16px"></div>
+  </div>
+  <div class="tarjeta"><h3>Tabla completa de rubros</h3><div class="scroll" id="tablaDesc"></div></div>
+</section>
+
+<!-- ============ COMPARAR ============ -->
+<section class="vista" id="v-comparar">
+  <h2 class="tit">Comparar grupos</h2>
+  <p class="desc">Barras con intervalo de confianza del 95 %. Cuando dos intervalos no se traslapan,
+    la diferencia es difícil de atribuir al azar; abajo se contrasta con una prueba formal.</p>
+  <div class="tarjeta">
+    <div class="rejilla dos">
+      <div class="control"><label class="campo" for="selGrupo">Agrupar por</label><select id="selGrupo"></select></div>
+      <div class="control"><label class="campo" for="selVarG">Medir</label><select id="selVarG"></select></div>
+    </div>
+    <div id="grComparar"></div>
+    <div id="pruebaGrupos" class="narrativa" style="margin-top:16px;font-size:16px"></div>
+  </div>
+  <div class="tarjeta"><h3>Detalle por grupo</h3><div class="scroll" id="tablaGrupos"></div></div>
+</section>
+
+<!-- ============ RELACIONES ============ -->
+<section class="vista" id="v-relaciones">
+  <h2 class="tit">Relaciones</h2>
+  <p class="desc">Qué tanto se mueve un gasto cuando se mueve otra variable. La recta es una regresión
+    por mínimos cuadrados; r² dice cuánta variación explica.</p>
+  <div class="tarjeta">
+    <div class="rejilla dos">
+      <div class="control"><label class="campo" for="selX">Eje horizontal</label><select id="selX"></select></div>
+      <div class="control"><label class="campo" for="selY">Eje vertical</label><select id="selY"></select></div>
+    </div>
+    <div id="grDispersion"></div>
+    <div id="lecturaRel" class="narrativa" style="margin-top:16px;font-size:16px"></div>
+  </div>
+  <div class="tarjeta"><h3>Matriz de correlaciones</h3><div class="scroll" id="matrizCorr"></div></div>
+</section>
+
+<!-- ============ PROYECCIÓN ============ -->
+<section class="vista" id="v-proyeccion">
+  <h2 class="tit">Proyección</h2>
+  <p class="desc">Qué costará sostener la práctica en los próximos años y cuánto costaría que el INDER
+    asumiera determinados rubros. Los supuestos son editables y quedan registrados en el informe.</p>
+  <div class="tarjeta">
+    <h3>Supuestos</h3>
+    <div class="rejilla tres">
+      <div class="control"><label class="campo" for="pIpc">Inflación anual esperada (%)</label><input type="number" id="pIpc" value="5.2" step="0.1"></div>
+      <div class="control"><label class="campo" for="pAnios">Horizonte (años)</label><input type="number" id="pAnios" value="5" min="1" max="15"></div>
+      <div class="control"><label class="campo" for="pSmmlv">Salario mínimo mensual (COP)</label><input type="number" id="pSmmlv" value="1623500" step="1000"></div>
+      <div class="control"><label class="campo" for="pPobla">Deportistas afiliados en la ciudad (estimado)</label><input type="number" id="pPobla" value="12000" step="500"></div>
+      <div class="control"><label class="campo" for="pCubre">Rubro que asumiría el INDER</label><select id="pCubre"></select></div>
+      <div class="control"><label class="campo" for="pCober">Cobertura del subsidio (%)</label><input type="number" id="pCober" value="100" min="0" max="100"></div>
+    </div>
+  </div>
+  <div class="rejilla tres" id="cifrasProy"></div>
+  <div class="tarjeta"><h3>Costo anual proyectado por deportista</h3><div id="grProyeccion"></div>
+    <div class="leyenda"><span><i style="background:var(--tinta)"></i>Sin intervención</span><span><i style="background:var(--cancha)"></i>Con el subsidio simulado</span></div></div>
+  <div class="tarjeta"><h3>Lectura</h3><div class="narrativa" id="lecturaProy" style="font-size:16px"></div></div>
+</section>
+
+<!-- ============ DIAGNÓSTICO ============ -->
+<section class="vista" id="v-diagnostico">
+  <h2 class="tit">Diagnóstico</h2>
+  <p class="desc">El aplicativo aplica reglas fijas sobre los datos y marca dónde hay una barrera de
+    acceso, dónde la muestra todavía no alcanza para afirmar nada y qué conviene reportear a continuación.</p>
+  <div id="semaforo"></div>
+  <div class="tarjeta"><h3>Barrera económica por grupo</h3>
+    <p style="font-size:13px;color:var(--suave);margin-bottom:12px">Costo anual neto del deporte sobre el ingreso anual del hogar. Umbrales: hasta 5 % baja, hasta 15 % moderada, hasta 30 % alta, por encima crítica.</p>
+    <div class="scroll" id="tablaCarga"></div></div>
+  <div class="tarjeta"><h3>Qué reportear ahora</h3><div class="narrativa" id="agenda" style="font-size:16px"></div></div>
+</section>
+
+<!-- ============ VOCES ============ -->
+<section class="vista" id="v-voces">
+  <h2 class="tit">Voces</h2>
+  <p class="desc">Respuestas abiertas de quienes autorizaron el uso de sus palabras, ordenadas por la
+    carga económica que reportan. Sirven para elegir a quién entrevistar.</p>
+  <div class="fila" style="margin-bottom:16px">
+    <input type="text" id="buscaVoz" placeholder="Buscar una palabra" style="max-width:280px">
+  </div>
+  <div id="listaVoces"></div>
+</section>
+
+<!-- ============ INFORME ============ -->
+<section class="vista" id="v-informe">
+  <h2 class="tit">Informe</h2>
+  <p class="desc">Redacción automática de los hallazgos con todas las cifras verificadas contra los datos
+    cargados, más la ficha metodológica para la bitácora.</p>
+  <div class="fila" style="margin-bottom:18px">
+    <button class="btn" id="btnCopiar">Copiar informe</button>
+    <button class="btn sec" id="btnDescargar">Descargar en Markdown</button>
+    <button class="btn sec" id="btnIA">Profundizar con IA</button>
+    <span id="msgIA" style="font-size:13px;color:var(--suave)"></span>
+  </div>
+  <div class="tarjeta"><div class="narrativa" id="informe"></div></div>
+  <div class="tarjeta" id="cajaIA" hidden><h3>Lectura adicional</h3><div class="narrativa" id="salidaIA" style="font-size:16px"></div></div>
+</section>
+
+</main>
+
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const S = { cab:[], filas:[], mapa:{}, datos:[], listo:false, demo:false, fuente:'' };
+
+/* ============ formato ============ */
+const fCOP = n => (n==null||!isFinite(n)) ? '—' : '$' + Math.round(n).toLocaleString('es-CO');
+const fN = (n,d=1) => (n==null||!isFinite(n)) ? '—' : n.toLocaleString('es-CO',{minimumFractionDigits:d,maximumFractionDigits:d});
+const fPct = (n,d=1) => (n==null||!isFinite(n)) ? '—' : fN(n*100,d)+' %';
+const esc = t => String(t==null?'':t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm = t => String(t==null?'':t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+
+function parseNum(v){
+  if (v==null) return null;
+  if (typeof v === 'number') return isFinite(v)? v : null;
+  let s = String(v).replace(/[^\d.,-]/g,'').trim();
+  if (!s) return null;
+  const tienePunto = s.includes('.'), tieneComa = s.includes(',');
+  if (tienePunto && tieneComa){
+    s = (s.lastIndexOf(',') > s.lastIndexOf('.'))
+      ? s.replace(/\./g,'').replace(',','.')
+      : s.replace(/,/g,'');
+  } else if (tieneComa){
+    const p = s.split(',');
+    s = (p.length>2 || p[1].length===3) ? s.replace(/,/g,'') : s.replace(',','.');
+  } else if (tienePunto){
+    const p = s.split('.');
+    if (p.length>2 || (p.length===2 && p[1].length===3)) s = s.replace(/\./g,'');
+  }
+  const n = parseFloat(s);
+  return isFinite(n) ? n : null;
+}
+
+/* ============ estadística ============ */
+const suma = a => a.reduce((x,y)=>x+y,0);
+const media = a => a.length ? suma(a)/a.length : NaN;
+function varianza(a){ if(a.length<2) return NaN; const m=media(a); return suma(a.map(x=>(x-m)**2))/(a.length-1); }
+const de = a => Math.sqrt(varianza(a));
+function cuantil(a,p){
+  if(!a.length) return NaN;
+  const o=[...a].sort((x,y)=>x-y), h=(o.length-1)*p, b=Math.floor(h), r=h-b;
+  return o[b+1]!==undefined ? o[b]+r*(o[b+1]-o[b]) : o[b];
+}
+const mediana = a => cuantil(a,0.5);
+function asimetria(a){
+  const n=a.length; if(n<3) return NaN;
+  const m=media(a), s=de(a); if(!s) return 0;
+  return (n/((n-1)*(n-2)))*suma(a.map(x=>((x-m)/s)**3));
+}
+const T95=[12.71,4.303,3.182,2.776,2.571,2.447,2.365,2.306,2.262,2.228,2.201,2.179,2.160,2.145,2.131,2.120,2.110,2.101,2.093,2.086,2.080,2.074,2.069,2.064,2.060,2.056,2.052,2.048,2.045,2.042];
+const tCrit = df => df<1 ? NaN : (df<=30 ? T95[df-1] : (df<=60?2.0:1.96));
+function ic95(a){
+  const n=a.length; if(n<2) return [NaN,NaN];
+  const m=media(a), e=tCrit(n-1)*de(a)/Math.sqrt(n);
+  return [m-e, m+e];
+}
+function resumen(a){
+  const v=a.filter(x=>x!=null&&isFinite(x));
+  if(!v.length) return {n:0};
+  const m=media(v), s=de(v), [li,ls]=ic95(v);
+  return {n:v.length, media:m, mediana:mediana(v), de:s, cv:m?s/m:NaN,
+    min:Math.min(...v), max:Math.max(...v), q1:cuantil(v,.25), q3:cuantil(v,.75),
+    ric:cuantil(v,.75)-cuantil(v,.25), ic:[li,ls], asim:asimetria(v), suma:suma(v), datos:v};
+}
+function gammln(x){
+  const c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,.1208650973866179e-2,-.5395239384953e-5];
+  let y=x, t=x+5.5; t-=(x+.5)*Math.log(t); let s=1.000000000190015;
+  for(let j=0;j<6;j++) s+=c[j]/++y;
+  return -t+Math.log(2.5066282746310005*s/x);
+}
+function betacf(a,b,x){
+  const M=200, EPS=3e-12, FP=1e-300;
+  let qab=a+b, qap=a+1, qam=a-1, c=1, d=1-qab*x/qap;
+  if(Math.abs(d)<FP) d=FP; d=1/d; let h=d;
+  for(let m=1;m<=M;m++){
+    const m2=2*m;
+    let aa=m*(b-m)*x/((qam+m2)*(a+m2));
+    d=1+aa*d; if(Math.abs(d)<FP) d=FP;
+    c=1+aa/c; if(Math.abs(c)<FP) c=FP;
+    d=1/d; h*=d*c;
+    aa=-(a+m)*(qab+m)*x/((a+m2)*(qap+m2));
+    d=1+aa*d; if(Math.abs(d)<FP) d=FP;
+    c=1+aa/c; if(Math.abs(c)<FP) c=FP;
+    d=1/d; const del=d*c; h*=del;
+    if(Math.abs(del-1)<EPS) break;
+  }
+  return h;
+}
+function betai(a,b,x){
+  if(x<=0) return 0; if(x>=1) return 1;
+  const bt=Math.exp(gammln(a+b)-gammln(a)-gammln(b)+a*Math.log(x)+b*Math.log(1-x));
+  return x < (a+1)/(a+b+2) ? bt*betacf(a,b,x)/a : 1-bt*betacf(b,a,1-x)/b;
+}
+const pT = (t,df) => (!isFinite(t)||df<1) ? NaN : betai(df/2,0.5,df/(df+t*t));
+const pF = (F,d1,d2) => (!isFinite(F)||F<0) ? NaN : betai(d2/2,d1/2,d2/(d2+d1*F));
+
+function welch(a,b){
+  if(a.length<2||b.length<2) return null;
+  const m1=media(a), m2=media(b), v1=varianza(a), v2=varianza(b), n1=a.length, n2=b.length;
+  const se=Math.sqrt(v1/n1+v2/n2); if(!se) return null;
+  const t=(m1-m2)/se;
+  const df=(v1/n1+v2/n2)**2 / ((v1/n1)**2/(n1-1)+(v2/n2)**2/(n2-1));
+  const sp=Math.sqrt(((n1-1)*v1+(n2-1)*v2)/(n1+n2-2));
+  return {t, df, p:pT(t,df), d: sp? (m1-m2)/sp : NaN, m1, m2};
+}
+function anova(grupos){
+  const g=grupos.filter(x=>x.length>=2); if(g.length<2) return null;
+  const todos=[].concat(...g), N=todos.length, gm=media(todos);
+  const sb=suma(g.map(x=>x.length*(media(x)-gm)**2));
+  const sw=suma(g.map(x=>suma(x.map(v=>(v-media(x))**2))));
+  const d1=g.length-1, d2=N-g.length;
+  if(d2<1||!sw) return null;
+  const F=(sb/d1)/(sw/d2);
+  return {F, d1, d2, p:pF(F,d1,d2), eta2: sb/(sb+sw), k:g.length, N};
+}
+function regresion(pares){
+  const p=pares.filter(([x,y])=>x!=null&&y!=null&&isFinite(x)&&isFinite(y));
+  if(p.length<3) return null;
+  const xs=p.map(d=>d[0]), ys=p.map(d=>d[1]);
+  const mx=media(xs), my=media(ys);
+  const sxy=suma(p.map(([x,y])=>(x-mx)*(y-my)));
+  const sxx=suma(xs.map(x=>(x-mx)**2)), syy=suma(ys.map(y=>(y-my)**2));
+  if(!sxx||!syy) return null;
+  const b=sxy/sxx, a=my-b*mx, r=sxy/Math.sqrt(sxx*syy);
+  const n=p.length, t=r*Math.sqrt((n-2)/(1-r*r));
+  return {a, b, r, r2:r*r, n, p:pT(t,n-2), puntos:p};
+}
+function outliersRIC(a){
+  const q1=cuantil(a,.25), q3=cuantil(a,.75), ric=q3-q1;
+  return {bajo:q1-1.5*ric, alto:q3+1.5*ric, cuantos:a.filter(v=>v<q1-1.5*ric||v>q3+1.5*ric).length};
+}
+
+/* ============ CSV ============ */
+function leerCSV(texto){
+  const t = texto.replace(/^\uFEFF/,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  const sep = (t.split('\n')[0].split('\t').length > t.split('\n')[0].split(',').length) ? '\t' : ',';
+  const filas=[]; let campo='', fila=[], comillas=false;
+  for(let i=0;i<t.length;i++){
+    const c=t[i];
+    if(comillas){
+      if(c==='"'){ if(t[i+1]==='"'){campo+='"';i++;} else comillas=false; }
+      else campo+=c;
+    } else {
+      if(c==='"') comillas=true;
+      else if(c===sep){ fila.push(campo); campo=''; }
+      else if(c==='\n'){ fila.push(campo); filas.push(fila); fila=[]; campo=''; }
+      else campo+=c;
+    }
+  }
+  if(campo||fila.length){ fila.push(campo); filas.push(fila); }
+  const limpias = filas.filter(f=>f.some(c=>String(c).trim()!==''));
+  if(!limpias.length) return {cab:[], filas:[]};
+  const cab = limpias[0].map(c=>String(c).trim());
+  const datos = limpias.slice(1).map(f => {
+    const o={}; cab.forEach((h,i)=> o[h] = f[i]!==undefined ? String(f[i]).trim() : '');
+    return o;
+  });
+  return {cab, filas:datos};
+}
+
+/* ============ diccionario de columnas ============ */
+const CAMPOS = [
+  {k:'quien', et:'Quién responde', tipo:'cat', cl:['quien responde']},
+  {k:'edad', et:'Edad', tipo:'num', cl:['edad']},
+  {k:'genero', et:'Género', tipo:'cat', cl:['genero','sexo']},
+  {k:'comuna', et:'Comuna o corregimiento', tipo:'cat', cl:['comuna','corregimiento']},
+  {k:'barrio', et:'Barrio', tipo:'cat', cl:['barrio']},
+  {k:'estrato', et:'Estrato', tipo:'cat', cl:['estrato']},
+  {k:'deporte', et:'Deporte principal', tipo:'cat', cl:['deporte']},
+  {k:'club', et:'Club o liga', tipo:'cat', cl:['club','liga deportiva nombre','nombre del club']},
+  {k:'afiliado', et:'Afiliado a una liga', tipo:'cat', cl:['afiliado']},
+  {k:'categoria', et:'Categoría', tipo:'cat', cl:['categoria']},
+  {k:'anios', et:'Años de práctica', tipo:'num', cl:['anos que lleva','anios que lleva','tiempo practicando']},
+  {k:'horas', et:'Horas de entrenamiento semanales', tipo:'num', cl:['horas de entrenamiento','horas por semana']},
+  {k:'escenario', et:'Dónde entrena', tipo:'cat', cl:['donde entrena','escenario']},
+  {k:'m_mensualidad', et:'Mensualidad del club', tipo:'num', cl:['mensualidad']},
+  {k:'m_transporte', et:'Transporte (mes)', tipo:'num', cl:['transporte a entrenamientos','transporte']},
+  {k:'m_alimentacion', et:'Alimentación y suplementos (mes)', tipo:'num', cl:['alimentacion','suplemento']},
+  {k:'m_entrenador', et:'Entrenador particular (mes)', tipo:'num', cl:['entrenador o clases','clases particulares']},
+  {k:'m_medico', et:'Servicios médicos (mes)', tipo:'num', cl:['servicios medicos','fisioterapia','seguro deportivo']},
+  {k:'m_otros', et:'Otros gastos (mes)', tipo:'num', cl:['otros gastos mensuales']},
+  {k:'a_afiliacion', et:'Afiliación anual a la liga', tipo:'num', cl:['afiliacion o inscripcion anual','inscripcion anual']},
+  {k:'a_carne', et:'Carné o registro (año)', tipo:'num', cl:['carne','registro o licencia']},
+  {k:'a_uniformes', et:'Uniformes (año)', tipo:'num', cl:['uniforme']},
+  {k:'a_implementos', et:'Implementos (año)', tipo:'num', cl:['implemento','equipamiento']},
+  {k:'a_torneos', et:'Inscripciones a torneos (año)', tipo:'num', cl:['inscripciones a torneos','torneo']},
+  {k:'a_viajes', et:'Viajes y hospedaje (año)', tipo:'num', cl:['viajes y hospedaje','hospedaje']},
+  {k:'a_examenes', et:'Exámenes médicos (año)', tipo:'num', cl:['examenes medicos','valoraciones']},
+  {k:'ingreso', et:'Ingreso del hogar', tipo:'cat', cl:['ingreso mensual del hogar','ingreso']},
+  {k:'apoyos', et:'Apoyos que recibe', tipo:'cat', cl:['apoyos que recibe','apoyo']},
+  {k:'valorApoyo', et:'Valor mensual de los apoyos', tipo:'num', cl:['valor mensual aproximado']},
+  {k:'falta', et:'Ha faltado por dinero', tipo:'cat', cl:['ha faltado','falta de dinero']},
+  {k:'abandono', et:'Cercanía al abandono (1-5)', tipo:'num', cl:['abandonar el deporte','abandono']},
+  {k:'gastoPesa', et:'Gasto que más pesa', tipo:'cat', cl:['gasto que mas pesa','mas pesa']},
+  {k:'texto', et:'Respuesta abierta', tipo:'texto', cl:['mas dificil de costear','dificil de costear']},
+  {k:'consent', et:'Autoriza uso de respuestas', tipo:'cat', cl:['autoriza']},
+];
+const MENS = [['m_mensualidad','Mensualidad del club'],['m_transporte','Transporte'],['m_alimentacion','Alimentación y suplementos'],['m_entrenador','Entrenador particular'],['m_medico','Servicios médicos'],['m_otros','Otros gastos']];
+const ANU = [['a_afiliacion','Afiliación a la liga'],['a_carne','Carné y registro'],['a_uniformes','Uniformes'],['a_implementos','Implementos'],['a_torneos','Inscripciones a torneos'],['a_viajes','Viajes por competencias'],['a_examenes','Exámenes médicos']];
+
+function autodetectar(cab){
+  const m={}, usadas=new Set();
+  CAMPOS.forEach(c=>{
+    let mejor=null, punt=0;
+    cab.forEach(h=>{
+      if(usadas.has(h)) return;
+      const nh=norm(h);
+      c.cl.forEach(k=>{ if(nh.includes(k) && k.length>punt){ punt=k.length; mejor=h; } });
+    });
+    if(mejor){ m[c.k]=mejor; usadas.add(mejor); }
+  });
+  return m;
+}
+
+/* ============ ingresos ============ */
+function ingresoSMMLV(txt){
+  const t=norm(txt);
+  if(!t||t.includes('prefiero')||t.includes('no responder')) return null;
+  if(t.includes('menos de 1')) return 0.7;
+  if(t.includes('1 y 2')) return 1.5;
+  if(t.includes('2 y 3')) return 2.5;
+  if(t.includes('3 y 5')) return 4;
+  if(t.includes('5 y 8')) return 6.5;
+  if(t.includes('mas de 8')) return 10;
+  const n=parseNum(txt);
+  return (n && n>100000) ? null : (n||null);
+}
+const P = () => ({
+  ipc: (parseNum($('#pIpc').value)||0)/100,
+  anios: Math.max(1, Math.min(15, parseNum($('#pAnios').value)||5)),
+  smmlv: parseNum($('#pSmmlv').value)||1623500,
+  pobla: parseNum($('#pPobla').value)||0,
+  cubre: $('#pCubre').value,
+  cober: (parseNum($('#pCober').value)||0)/100,
+});
+
+/* ============ procesamiento ============ */
+function procesar(){
+  const m=S.mapa, smmlv=parseNum($('#pSmmlv').value)||1623500;
+  const val=(f,k)=> m[k] ? f[m[k]] : null;
+  const num=(f,k)=> { const v=parseNum(val(f,k)); return v==null?0:v; };
+  S.datos = S.filas.map((f,i)=>{
+    const d={_i:i+1};
+    CAMPOS.forEach(c=> d[c.k] = m[c.k] ? String(f[m[c.k]]??'').trim() : '');
+    MENS.forEach(([k])=> d[k]=num(f,k));
+    ANU.forEach(([k])=> d[k]=num(f,k));
+    ['edad','anios','horas','abandono','valorApoyo'].forEach(k=> d[k]=parseNum(val(f,k)));
+    d.mensualTotal = suma(MENS.map(([k])=>d[k]));
+    d.anualExtras = suma(ANU.map(([k])=>d[k]));
+    d.anualTotal = d.mensualTotal*12 + d.anualExtras;
+    d.apoyoAnual = (d.valorApoyo||0)*12;
+    d.netoAnual = Math.max(0, d.anualTotal - d.apoyoAnual);
+    const sm = ingresoSMMLV(d.ingreso);
+    d.ingresoMes = sm!=null ? sm*smmlv : null;
+    d.ingresoAnual = d.ingresoMes!=null ? d.ingresoMes*12 : null;
+    d.carga = d.ingresoAnual ? d.netoAnual/d.ingresoAnual : null;
+    d.costoHora = (d.horas && d.horas>0) ? d.anualTotal/(d.horas*48) : null;
+    d.enSMMLV = d.anualTotal/smmlv;
+    const ap=norm(d.apoyos);
+    d.tieneApoyo = !ap ? null : (ap.includes('ninguno') && !ap.includes(',') ? 'Sin ningún apoyo' : 'Recibe algún apoyo');
+    d.apoyoInder = ap.includes('inder') ? 'Con apoyo del INDER' : (ap? 'Sin apoyo del INDER' : null);
+    d.autoriza = !m.consent ? true : norm(d.consent).startsWith('si');
+    return d;
+  }).filter(d => d.anualTotal>0 || d.deporte);
+  S.listo = S.datos.length>0;
+}
+
+/* ============ datos simulados ============ */
+function demo(n=210){
+  const perfiles = {
+    'Natación':[220000,1.4], 'Fútbol':[95000,1.0], 'Patinaje':[180000,1.5], 'Baloncesto':[110000,.9],
+    'Voleibol':[90000,.8], 'Atletismo':[70000,.9], 'Ciclismo':[160000,1.9], 'Taekwondo':[105000,1.0],
+    'Tenis':[320000,1.6], 'Gimnasia':[190000,1.2], 'Judo':[100000,.9], 'Boxeo':[80000,.8], 'Porrismo':[210000,1.3]
+  };
+  const comunas=['1 Popular','3 Manrique','5 Castilla','6 Doce de Octubre','7 Robledo','8 Villa Hermosa','10 La Candelaria','11 Laureles-Estadio','13 San Javier','14 El Poblado','16 Belén','60 San Cristóbal'];
+  const estratoPorComuna={'14 El Poblado':5.4,'11 Laureles-Estadio':4.6,'16 Belén':3.4,'10 La Candelaria':3.0,'5 Castilla':2.8,'7 Robledo':2.5,'8 Villa Hermosa':2.1,'3 Manrique':2.0,'13 San Javier':1.9,'6 Doce de Octubre':1.9,'1 Popular':1.5,'60 San Cristóbal':1.9};
+  const ingresos=['Menos de 1 salario mínimo','Entre 1 y 2 salarios mínimos','Entre 2 y 3 salarios mínimos','Entre 3 y 5 salarios mínimos','Entre 5 y 8 salarios mínimos','Más de 8 salarios mínimos'];
+  const frases=['Lo más duro son los viajes: cada torneo fuera de la ciudad son dos semanas de mercado.','Los uniformes se cambian cada año y toca comprarlos completos aunque el anterior sirva.','El transporte diario hasta la unidad deportiva se lleva la mitad de lo que gasto en el deporte.','Los patines se dañan cada temporada y no hay dónde repararlos barato.','La mensualidad la puedo pagar, lo que no puedo son las inscripciones cuando caen tres torneos seguidos.','Nos toca hacer rifas entre las familias del club para poder viajar a los nacionales.','Cuando subió la mensualidad tuve que sacar a uno de mis dos hijos del club.','Los exámenes médicos que exige la liga no los cubre la EPS y hay que pagarlos cada año.'];
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  const gauss=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  const filas=[];
+  for(let i=0;i<n;i++){
+    const dep=pick(Object.keys(perfiles)), [base,mult]=perfiles[dep];
+    const com=pick(comunas), est=Math.max(1,Math.min(6,Math.round(estratoPorComuna[com]+gauss()*0.6)));
+    const cap=0.55+est*0.16;
+    const men=Math.max(0,Math.round((base*cap*(1+gauss()*.2))/1000)*1000);
+    const r=v=>Math.max(0,Math.round(v/1000)*1000);
+    const ingIdx=Math.max(0,Math.min(5,Math.round((est-1)*0.9+gauss()*0.7)));
+    filas.push({
+      'Marca temporal':'2026-0'+(1+i%9)+'-15',
+      'Quién responde esta encuesta':pick(['El propio deportista','Madre, padre o acudiente','Entrenador o directivo del club']),
+      'Edad del deportista':Math.round(rnd(8,24)),
+      'Género del deportista':Math.random()<.46?'Mujer':'Hombre',
+      'Comuna o corregimiento de residencia':com,
+      'Estrato socioeconómico de la vivienda':String(est),
+      'Deporte principal':dep,
+      'Nombre del club o liga':'Club '+dep+' '+pick(['Antioquia','Medellín','Aburrá','Nororiental']),
+      'Está afiliado a una liga deportiva':Math.random()<.82?'Sí':'No',
+      'Categoría en la que compite':pick(['Formativa o infantil','Juvenil','Mayores']),
+      'Años que lleva practicando el deporte':Math.round(rnd(1,12)),
+      'Horas de entrenamiento por semana':Math.round(rnd(4,20)),
+      'Dónde entrena habitualmente':est<=2?pick(['Escenario público del INDER','Escenario público del INDER','Espacio público (calle, parque, cancha de barrio)','Combina varios']):pick(['Escenario privado o del club','Escenario público del INDER','Combina varios']),
+      'Mensualidad al club o liga':men,
+      'Transporte a entrenamientos y competencias':r(rnd(40000,180000)*(est<=2?1.15:.9)),
+      'Alimentación especializada o suplementos':r(rnd(0,160000)*cap),
+      'Entrenador o clases particulares':Math.random()<.25?r(rnd(80000,400000)*cap):0,
+      'Servicios médicos, fisioterapia o seguro deportivo':r(rnd(0,120000)*cap),
+      'Otros gastos mensuales del deporte':r(rnd(0,70000)),
+      'Afiliación o inscripción anual a la liga':r(rnd(50000,300000)*mult),
+      'Carné, registro o licencia deportiva':r(rnd(20000,90000)),
+      'Uniformes y ropa deportiva en el año':r(rnd(120000,480000)*mult),
+      'Implementos y equipamiento en el año':r(rnd(60000,1100000)*mult*cap),
+      'Inscripciones a torneos en el año':r(rnd(80000,600000)*mult),
+      'Viajes y hospedaje por competencias en el año':r(rnd(0,1500000)*mult*cap),
+      'Exámenes médicos y valoraciones en el año':r(rnd(60000,260000)),
+      'Ingreso mensual del hogar':ingresos[ingIdx],
+      'Apoyos que recibe actualmente':Math.random()<.28?pick(['Beca o descuento del club o liga','Apoyo del INDER','Apoyo de Indeportes Antioquia o Comité Olímpico','Patrocinio de una empresa','Beca o descuento del club o liga, Apoyo del INDER']):'Ninguno',
+      'Valor mensual aproximado de esos apoyos':Math.random()<.28?r(rnd(50000,400000)):0,
+      'Ha faltado a entrenamientos o competencias por falta de dinero':est<=2?pick(['Sí, con frecuencia','Sí, alguna vez','Sí, alguna vez','Nunca']):pick(['Sí, alguna vez','Nunca','Nunca']),
+      'Qué tan cerca ha estado de abandonar el deporte por costos':Math.max(1,Math.min(5,Math.round(4.4-est*0.45+gauss()*0.9))),
+      'El gasto que más pesa en el presupuesto':pick(['Mensualidad del club','Transporte','Uniformes e implementos','Inscripciones a torneos','Viajes por competencias','Alimentación y suplementos']),
+      'Qué es lo más difícil de costear y por qué':Math.random()<.55?pick(frases):'',
+      'Autoriza el uso anónimo de estas respuestas en una publicación periodística':Math.random()<.93?'Sí':'No'
+    });
+  }
+  return {cab:Object.keys(filas[0]), filas:filas.map(f=>{const o={};Object.keys(f).forEach(k=>o[k]=String(f[k]));return o;})};
+}
+
+/* ============ gráficos SVG ============ */
+const CL={cancha:'#1E6F4F',agua:'#1D5C8C',senal:'#E0A100',alerta:'#BE4128',tinta:'#16242B',linea:'#CBD4D0',linea2:'#E3E8E4',suave:'#5C6E72'};
+const svgW = (w,h,inner) => `<svg class="gr" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet" role="img">${inner}</svg>`;
+const tx = (x,y,t,o={}) => `<text x="${x}" y="${y}" fill="${o.c||CL.suave}" font-size="${o.s||11}" font-weight="${o.w||400}" text-anchor="${o.a||'start'}"${o.rot?` transform="rotate(${o.rot} ${x} ${y})"`:''}>${esc(t)}</text>`;
+function tics(min,max,n=5){
+  if(max===min){ max=min+1; }
+  const bruto=(max-min)/n, mag=Math.pow(10,Math.floor(Math.log10(bruto)));
+  const paso=[1,2,2.5,5,10].find(m=>m*mag>=bruto)*mag;
+  const ini=Math.floor(min/paso)*paso, out=[];
+  for(let v=ini; v<=max+paso*0.001; v+=paso) if(v>=min-paso*0.001) out.push(+v.toFixed(10));
+  return out;
+}
+const corto = n => {
+  const a=Math.abs(n);
+  if(a>=1e6) return '$'+fN(n/1e6,a>=1e7?0:1)+' M';
+  if(a>=1e3) return '$'+Math.round(n/1e3)+' k';
+  return fN(n,0);
+};
+
+function grHistograma(vals,{fmt=corto}={}){
+  if(vals.length<4) return `<p class="vacio">Se necesitan al menos cuatro respuestas para dibujar la distribución.</p>`;
+  const W=700,H=300,ml=52,mr=14,mt=14,mb=44;
+  const min=Math.min(...vals), max=Math.max(...vals);
+  const k=Math.max(5,Math.min(14,Math.ceil(Math.sqrt(vals.length))));
+  const anchoB=(max-min)/k || 1;
+  const cubos=Array.from({length:k},(_,i)=>({a:min+i*anchoB,b:min+(i+1)*anchoB,n:0}));
+  vals.forEach(v=>{ let i=Math.floor((v-min)/anchoB); if(i>=k)i=k-1; if(i<0)i=0; cubos[i].n++; });
+  const maxN=Math.max(...cubos.map(c=>c.n));
+  const px=v=>ml+(v-min)/((max-min)||1)*(W-ml-mr);
+  const py=n=>H-mb-(n/maxN)*(H-mt-mb);
+  let s=`<line x1="${ml}" y1="${H-mb}" x2="${W-mr}" y2="${H-mb}" stroke="${CL.linea}"/>`;
+  tics(0,maxN,4).forEach(t=>{ s+=`<line x1="${ml}" y1="${py(t)}" x2="${W-mr}" y2="${py(t)}" stroke="${CL.linea2}"/>`+tx(ml-8,py(t)+4,fN(t,0),{a:'end'}); });
+  cubos.forEach(c=>{ const x=px(c.a), w=Math.max(1,px(c.b)-px(c.a)-2);
+    s+=`<rect x="${x+1}" y="${py(c.n)}" width="${w}" height="${H-mb-py(c.n)}" fill="${CL.agua}" opacity=".82"/>`; });
+  const m=media(vals), sd=de(vals);
+  if(sd>0){
+    let d='';
+    for(let i=0;i<=80;i++){
+      const x=min+(max-min)*i/80;
+      const dens=Math.exp(-((x-m)**2)/(2*sd*sd))/(sd*Math.sqrt(2*Math.PI));
+      const n=dens*vals.length*anchoB;
+      d+=(i?'L':'M')+px(x).toFixed(1)+' '+py(Math.min(n,maxN*1.15)).toFixed(1);
+    }
+    s+=`<path d="${d}" fill="none" stroke="${CL.alerta}" stroke-width="2" opacity=".85"/>`;
+  }
+  s+=`<line x1="${px(m)}" y1="${mt}" x2="${px(m)}" y2="${H-mb}" stroke="${CL.tinta}" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  s+=tx(px(m),mt+11,'media',{c:CL.tinta,a:'middle',s:10,w:600});
+  tics(min,max,5).forEach(t=>{ if(t>=min&&t<=max) s+=tx(px(t),H-mb+18,fmt(t),{a:'middle'}); });
+  s+=tx(ml,H-8,'Frecuencia en el eje vertical · '+vals.length+' respuestas',{s:11});
+  return svgW(W,H,s);
+}
+
+function grCaja(vals,{fmt=corto}={}){
+  if(vals.length<4) return '';
+  const W=700,H=150,ml=52,mr=14;
+  const min=Math.min(...vals), max=Math.max(...vals);
+  const q1=cuantil(vals,.25), q2=mediana(vals), q3=cuantil(vals,.75), ric=q3-q1;
+  const lo=Math.max(min,q1-1.5*ric), hi=Math.min(max,q3+1.5*ric);
+  const px=v=>ml+(v-min)/((max-min)||1)*(W-ml-mr);
+  const y=62, h=44;
+  let s=`<line x1="${px(lo)}" y1="${y+h/2}" x2="${px(hi)}" y2="${y+h/2}" stroke="${CL.tinta}"/>`;
+  s+=`<line x1="${px(lo)}" y1="${y+8}" x2="${px(lo)}" y2="${y+h-8}" stroke="${CL.tinta}"/>`;
+  s+=`<line x1="${px(hi)}" y1="${y+8}" x2="${px(hi)}" y2="${y+h-8}" stroke="${CL.tinta}"/>`;
+  s+=`<rect x="${px(q1)}" y="${y}" width="${Math.max(2,px(q3)-px(q1))}" height="${h}" fill="${CL.cancha}" opacity=".2" stroke="${CL.cancha}"/>`;
+  s+=`<line x1="${px(q2)}" y1="${y}" x2="${px(q2)}" y2="${y+h}" stroke="${CL.cancha}" stroke-width="3"/>`;
+  vals.filter(v=>v<lo||v>hi).forEach(v=>{ s+=`<circle cx="${px(v)}" cy="${y+h/2}" r="3.5" fill="${CL.alerta}" opacity=".7"/>`; });
+  [[lo,'mín'],[q1,'Q1'],[q2,'mediana'],[q3,'Q3'],[hi,'máx']].forEach(([v,et])=>{
+    s+=tx(px(v),y-10,et,{a:'middle',s:10,w:600,c:CL.tinta});
+    s+=tx(px(v),y+h+18,fmt(v),{a:'middle',s:10});
+  });
+  s+=tx(ml,H-8,'Los puntos rojos son valores atípicos según el criterio de 1,5 rangos intercuartílicos',{s:11});
+  return svgW(W,H,s);
+}
+
+function grBarrasIC(items,{fmt=corto}={}){
+  if(!items.length) return `<p class="vacio">No hay grupos con datos suficientes.</p>`;
+  const n=items.length, W=700, altoF=Math.max(30, Math.min(46, 340/n)), H=n*altoF+58;
+  const ml=Math.min(190, 8+Math.max(...items.map(i=>i.et.length))*6.4), mr=68;
+  const max=Math.max(...items.map(i=>Math.max(i.media, i.ic?i.ic[1]:0)))*1.05 || 1;
+  const px=v=>ml+(v/max)*(W-ml-mr);
+  let s='';
+  tics(0,max,4).forEach(t=>{ s+=`<line x1="${px(t)}" y1="24" x2="${px(t)}" y2="${H-34}" stroke="${CL.linea2}"/>`+tx(px(t),18,fmt(t),{a:'middle',s:10}); });
+  items.forEach((it,i)=>{
+    const y=30+i*altoF, h=altoF-13;
+    const col = it.color || (i%2? CL.agua : CL.cancha);
+    s+=`<rect x="${ml}" y="${y}" width="${Math.max(1,px(it.media)-ml)}" height="${h}" fill="${col}" opacity=".85"/>`;
+    if(it.ic && isFinite(it.ic[0])){
+      const a=px(Math.max(0,it.ic[0])), b=px(it.ic[1]), cy=y+h/2;
+      s+=`<line x1="${a}" y1="${cy}" x2="${b}" y2="${cy}" stroke="${CL.tinta}" stroke-width="1.5"/>`;
+      s+=`<line x1="${a}" y1="${cy-5}" x2="${a}" y2="${cy+5}" stroke="${CL.tinta}"/>`;
+      s+=`<line x1="${b}" y1="${cy-5}" x2="${b}" y2="${cy+5}" stroke="${CL.tinta}"/>`;
+    }
+    s+=tx(ml-8,y+h/2+4,it.et,{a:'end',c:CL.tinta,s:11.5,w:500});
+    s+=tx(W-mr+6,y+h/2+4,fmt(it.media)+'  n='+it.n,{s:10.5});
+  });
+  s+=tx(ml,H-10,'La línea horizontal es el intervalo de confianza del 95 % de la media',{s:11});
+  return svgW(W,H,s);
+}
+
+function grApilada(items,{fmt=corto}={}){
+  const tot=suma(items.map(i=>i.valor));
+  if(!tot) return '';
+  const W=700,H=118, ml=0, cols=[CL.cancha,CL.agua,CL.senal,CL.alerta,'#6B4E9B','#0E8A8A','#8A6D3B','#4A7A2C','#B0662C','#3E5C76','#7A2E4A','#2C6E49','#9C6644'];
+  let x=0, s='';
+  items.forEach((it,i)=>{
+    const w=(it.valor/tot)*W;
+    s+=`<rect x="${x}" y="16" width="${Math.max(0,w-1)}" height="42" fill="${cols[i%cols.length]}"/>`;
+    if(w>52) s+=tx(x+w/2,42,fPct(it.valor/tot,0),{a:'middle',c:'#fff',s:11.5,w:600});
+    x+=w;
+  });
+  let cx=0, cy=76;
+  items.forEach((it,i)=>{
+    const et=it.et+' '+fPct(it.valor/tot,1);
+    const w=et.length*6.1+18;
+    if(cx+w>W){ cx=0; cy+=19; }
+    s+=`<rect x="${cx}" y="${cy-8}" width="9" height="9" rx="2" fill="${cols[i%cols.length]}"/>`;
+    s+=tx(cx+14,cy,et,{s:11,c:CL.tinta});
+    cx+=w;
+  });
+  return svgW(W,Math.max(H,cy+16),s);
+}
+
+function grDispersion(reg,labX,labY,{fx=corto,fy=corto}={}){
+  if(!reg) return `<p class="vacio">Faltan pares completos de datos para estimar la relación.</p>`;
+  const W=700,H=380,ml=64,mr=16,mt=18,mb=52;
+  const xs=reg.puntos.map(p=>p[0]), ys=reg.puntos.map(p=>p[1]);
+  const x0=Math.min(...xs), x1=Math.max(...xs), y0=Math.min(...ys), y1=Math.max(...ys);
+  const px=v=>ml+((v-x0)/((x1-x0)||1))*(W-ml-mr);
+  const py=v=>H-mb-((v-y0)/((y1-y0)||1))*(H-mt-mb);
+  let s='';
+  tics(y0,y1,5).forEach(t=>{ s+=`<line x1="${ml}" y1="${py(t)}" x2="${W-mr}" y2="${py(t)}" stroke="${CL.linea2}"/>`+tx(ml-8,py(t)+4,fy(t),{a:'end',s:10}); });
+  tics(x0,x1,5).forEach(t=>{ if(t>=x0&&t<=x1) s+=tx(px(t),H-mb+18,fx(t),{a:'middle',s:10}); });
+  reg.puntos.forEach(([x,y])=>{ s+=`<circle cx="${px(x)}" cy="${py(y)}" r="4" fill="${CL.agua}" opacity=".55"/>`; });
+  s+=`<line x1="${px(x0)}" y1="${py(reg.a+reg.b*x0)}" x2="${px(x1)}" y2="${py(reg.a+reg.b*x1)}" stroke="${CL.alerta}" stroke-width="2.5"/>`;
+  s+=tx(ml,H-32,labX,{s:11.5,c:CL.tinta,w:600});
+  s+=tx(-(H/2),15,labY,{rot:-90,a:'middle',s:11.5,c:CL.tinta,w:600});
+  s+=tx(W-mr,H-32,'r = '+fN(reg.r,2)+' · r² = '+fN(reg.r2,2)+' · n = '+reg.n,{a:'end',s:11.5,c:CL.tinta});
+  return svgW(W,H,s);
+}
+
+function grLineas(series,labels,{fmt=corto}={}){
+  const W=700,H=320,ml=64,mr=16,mt=18,mb=46;
+  const todos=[].concat(...series.map(s=>s.vals));
+  const y0=0, y1=Math.max(...todos)*1.06 || 1;
+  const px=i=>ml+(i/((labels.length-1)||1))*(W-ml-mr);
+  const py=v=>H-mb-((v-y0)/((y1-y0)||1))*(H-mt-mb);
+  let s='';
+  tics(y0,y1,5).forEach(t=>{ s+=`<line x1="${ml}" y1="${py(t)}" x2="${W-mr}" y2="${py(t)}" stroke="${CL.linea2}"/>`+tx(ml-8,py(t)+4,fmt(t),{a:'end',s:10}); });
+  labels.forEach((l,i)=> s+=tx(px(i),H-mb+18,l,{a:'middle',s:11}));
+  series.forEach(se=>{
+    let d='';
+    se.vals.forEach((v,i)=> d+=(i?'L':'M')+px(i).toFixed(1)+' '+py(v).toFixed(1));
+    s+=`<path d="${d}" fill="none" stroke="${se.color}" stroke-width="2.6"${se.guion?' stroke-dasharray="6 4"':''}/>`;
+    se.vals.forEach((v,i)=> s+=`<circle cx="${px(i)}" cy="${py(v)}" r="3.6" fill="${se.color}"/>`);
+    const u=se.vals.length-1;
+    s+=tx(px(u),py(se.vals[u])-12,fmt(se.vals[u]),{a:'end',s:11,w:600,c:se.color});
+  });
+  return svgW(W,H,s);
+}
+
+/* ============ tablas ============ */
+function tabla(cols,filas){
+  return `<table><thead><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead>
+  <tbody>${filas.map(f=>`<tr>${f.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+const NIVELES=[[0.05,'baja','n-baja'],[0.15,'moderada','n-moderada'],[0.30,'alta','n-alta'],[Infinity,'crítica','n-critica']];
+function nivelCarga(c){
+  if(c==null||!isFinite(c)) return {et:'sin dato',cls:''};
+  const n=NIVELES.find(x=>c<=x[0]);
+  return {et:n[1], cls:n[2]};
+}
+const marcaNivel = c => { const n=nivelCarga(c); return n.cls?`<span class="marca-nivel ${n.cls}">${n.et}</span>`:'—'; };
+
+/* ============ variables analizables ============ */
+function variables(){
+  const v=[
+    {k:'anualTotal', et:'Costo anual total del deporte', dinero:true},
+    {k:'netoAnual', et:'Costo anual después de apoyos', dinero:true},
+    {k:'mensualTotal', et:'Gasto mensual recurrente', dinero:true},
+    {k:'anualExtras', et:'Gastos anuales no recurrentes', dinero:true},
+  ];
+  MENS.forEach(([k,et])=> v.push({k, et:et+' (mes)', dinero:true}));
+  ANU.forEach(([k,et])=> v.push({k, et:et+' (año)', dinero:true}));
+  v.push({k:'carga', et:'Peso sobre el ingreso del hogar', pct:true});
+  v.push({k:'costoHora', et:'Costo por hora entrenada', dinero:true});
+  v.push({k:'enSMMLV', et:'Costo anual en salarios mínimos', dinero:false});
+  v.push({k:'ingresoAnual', et:'Ingreso anual del hogar', dinero:true});
+  v.push({k:'edad', et:'Edad', dinero:false});
+  v.push({k:'horas', et:'Horas de entrenamiento por semana', dinero:false});
+  v.push({k:'anios', et:'Años practicando', dinero:false});
+  v.push({k:'abandono', et:'Cercanía al abandono (1 a 5)', dinero:false});
+  return v.filter(x=> S.datos.some(d=>d[x.k]!=null&&isFinite(d[x.k])));
+}
+const varPorK = k => variables().find(v=>v.k===k) || {k, et:k, dinero:true};
+const fmtDe = v => v.pct ? (x=>fPct(x,1)) : (v.dinero ? corto : (x=>fN(x,1)));
+const fmtLargo = v => v.pct ? (x=>fPct(x,1)) : (v.dinero ? fCOP : (x=>fN(x,1)));
+function agrupables(){
+  const g=[['deporte','Deporte'],['comuna','Comuna o corregimiento'],['estrato','Estrato'],
+    ['genero','Género'],['categoria','Categoría'],['escenario','Escenario donde entrena'],
+    ['tieneApoyo','Recibe apoyo'],['apoyoInder','Apoyo del INDER'],['afiliado','Afiliación a liga'],
+    ['falta','Ha faltado por dinero'],['gastoPesa','Gasto que más pesa'],['ingreso','Ingreso del hogar']];
+  return g.filter(([k])=> new Set(S.datos.map(d=>d[k]).filter(x=>x&&x!=='—')).size>1);
+}
+function porGrupo(campo, vk, minN=1){
+  const m={};
+  S.datos.forEach(d=>{
+    const g=d[campo]; if(!g||g==='') return;
+    const v=d[vk]; if(v==null||!isFinite(v)) return;
+    (m[g]=m[g]||[]).push(v);
+  });
+  return Object.entries(m).filter(([,a])=>a.length>=minN)
+    .map(([et,a])=>({et, vals:a, ...resumen(a)}))
+    .sort((a,b)=>b.media-a.media);
+}
+
+/* ============ vistas ============ */
+function pintarTodo(){
+  pintarEstado(); pintarPanorama(); prepararSelects();
+  pintarDescriptivos(); pintarComparar(); pintarRelaciones();
+  pintarProyeccion(); pintarDiagnostico(); pintarVoces(); pintarInforme();
+  $$('nav.mod button').forEach(b=> b.disabled=false);
+}
+function pintarEstado(){
+  const d=S.datos, r=resumen(d.map(x=>x.anualTotal));
+  const deps=new Set(d.map(x=>x.deporte).filter(Boolean)).size;
+  const com=new Set(d.map(x=>x.comuna).filter(Boolean)).size;
+  $('#estado').innerHTML = `<span>Respuestas <b>${d.length}</b></span>
+    <span>Deportes <b>${deps}</b></span><span>Comunas <b>${com}</b></span>
+    <span>Costo anual mediano <b>${fCOP(r.mediana)}</b></span>
+    <span>Fuente <b>${esc(S.fuente)}</b></span>`;
+}
+
+function pintarPanorama(){
+  const d=S.datos, r=resumen(d.map(x=>x.anualTotal));
+  const cargas=d.map(x=>x.carga).filter(x=>x!=null&&isFinite(x));
+  const rc=resumen(cargas);
+  const smmlv=parseNum($('#pSmmlv').value)||1623500;
+  const porDep=porGrupo('deporte','anualTotal',3);
+  const porCom=porGrupo('comuna','anualTotal',3);
+  const criticos=cargas.filter(c=>c>0.30).length;
+  const faltaron=d.filter(x=>norm(x.falta).startsWith('si')).length;
+
+  $('#lede').innerHTML = `
+    <p class="lede">Sostener a un deportista afiliado en Medellín cuesta una mediana de
+      <em>${fCOP(r.mediana)}</em> al año, equivalente a ${fN(r.mediana/smmlv,1)} salarios mínimos mensuales.</p>
+    <p>La media es de ${fCOP(r.media)} con una desviación estándar de ${fCOP(r.de)}: el gasto no se
+    reparte parejo. La mitad de las familias encuestadas gasta entre ${fCOP(r.q1)} y ${fCOP(r.q3)},
+    mientras que el 10 % más costoso supera ${fCOP(cuantil(r.datos,.9))}.
+    ${porDep.length>1?`El deporte más caro de la muestra es ${porDep[0].et} (${fCOP(porDep[0].media)} en promedio) y el más económico ${porDep[porDep.length-1].et} (${fCOP(porDep[porDep.length-1].media)}), una brecha de ${fN(porDep[0].media/porDep[porDep.length-1].media,1)} veces.`:''}
+    ${rc.n?` Para el hogar típico eso representa ${fPct(rc.mediana)} de sus ingresos anuales${criticos?`, y en ${criticos} de ${rc.n} casos supera el 30 %, umbral en el que la práctica deportiva compite con gastos básicos`:''}.`:''}
+    ${faltaron?` ${faltaron} de ${d.length} deportistas reportan haber faltado a entrenamientos o competencias por falta de dinero.`:''}</p>`;
+
+  const rubros = [...MENS.map(([k,et])=>({et, valor:suma(d.map(x=>x[k]))*12})),
+                  ...ANU.map(([k,et])=>({et, valor:suma(d.map(x=>x[k]))}))]
+                  .filter(x=>x.valor>0).sort((a,b)=>b.valor-a.valor);
+  const tot=suma(rubros.map(x=>x.valor));
+  const apoyo=suma(d.map(x=>x.apoyoAnual));
+
+  $('#cifrasClave').innerHTML = [
+    ['n',fCOP(r.media),'Costo anual promedio por deportista','cifra'],
+    ['n',fCOP(r.mediana),'Mediana anual, menos sensible a los casos extremos','cifra agua'],
+    ['n',fCOP(r.de),'Desviación estándar: cuánto se dispersa el gasto','cifra senal'],
+    ['n',rubros.length?rubros[0].et:'—','Rubro que concentra más dinero ('+(rubros.length?fPct(rubros[0].valor/tot,0):'—')+' del total)','cifra'],
+    ['n',rc.n?fPct(rc.media):'—','Porción media del ingreso del hogar que absorbe el deporte','cifra alerta'],
+    ['n',apoyo?fPct(apoyo/(suma(d.map(x=>x.anualTotal))||1)):'0 %','Del gasto total que hoy cubren becas, patrocinios o apoyos públicos','cifra agua'],
+  ].map(([,n,l,c])=>`<div class="${c}"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+
+  $('#grComposicion').innerHTML = grApilada(rubros);
+  $('#grHistoPan').innerHTML = grHistograma(r.datos);
+}
+
+function prepararSelects(){
+  const vs=variables();
+  const op=a=>a.map(([v,t])=>`<option value="${v}">${esc(t)}</option>`).join('');
+  $('#selVar').innerHTML = op(vs.map(v=>[v.k,v.et]));
+  $('#selVarG').innerHTML = op(vs.map(v=>[v.k,v.et]));
+  $('#selX').innerHTML = op(vs.map(v=>[v.k,v.et]));
+  $('#selY').innerHTML = op(vs.map(v=>[v.k,v.et]));
+  $('#selGrupo').innerHTML = op(agrupables());
+  const gx=vs.find(v=>v.k==='ingresoAnual')?'ingresoAnual':vs[0].k;
+  $('#selX').value=gx; $('#selY').value='anualTotal'; $('#selVarG').value='anualTotal';
+  $('#pCubre').innerHTML = `<option value="">Ninguno (escenario actual)</option>` +
+    [...MENS.map(([k,et])=>[k,et+' (mensual)']),...ANU.map(([k,et])=>[k,et+' (anual)'])]
+      .map(([k,et])=>`<option value="${k}">${esc(et)}</option>`).join('');
+}
+
+function pintarDescriptivos(){
+  const v=varPorK($('#selVar').value||'anualTotal');
+  const vals=S.datos.map(d=>d[v.k]).filter(x=>x!=null&&isFinite(x));
+  const r=resumen(vals), fl=fmtLargo(v), fc=fmtDe(v);
+  $('#grHisto').innerHTML = grHistograma(vals,{fmt:fc});
+  $('#grCaja').innerHTML = grCaja(vals,{fmt:fc});
+  const at=vals.length>3?outliersRIC(vals):{cuantos:0};
+  const forma = r.asim>0.8 ? 'La distribución está sesgada a la derecha: unos pocos casos muy costosos jalan la media por encima de la mediana, así que la mediana describe mejor al deportista típico.'
+    : (r.asim<-0.8 ? 'La distribución está sesgada a la izquierda: hay una cola de valores bajos que arrastra la media.'
+    : 'La distribución es aproximadamente simétrica, así que media y mediana cuentan la misma historia.');
+  const disp = r.cv>0.8 ? 'La dispersión es muy alta (coeficiente de variación por encima de 0,8): hablar de un "costo promedio" en este rubro esconde realidades muy distintas.'
+    : (r.cv>0.4 ? 'La dispersión es moderada.' : 'La dispersión es baja: casi todos gastan algo parecido.');
+  $('#lecturaVar').innerHTML = `<p>${esc(v.et)}: ${r.n} respuestas válidas, media ${fl(r.media)}
+    (intervalo de confianza del 95 % entre ${fl(r.ic[0])} y ${fl(r.ic[1])}), mediana ${fl(r.mediana)},
+    desviación estándar ${fl(r.de)}.</p><p>${forma} ${disp}
+    ${at.cuantos?`Hay ${at.cuantos} valor${at.cuantos>1?'es':''} atípico${at.cuantos>1?'s':''} por encima de ${fl(at.alto)}; conviene verificar si son errores de digitación o casos reales que merecen reportería propia.`:'No se detectan valores atípicos.'}</p>`;
+  const vs=variables();
+  $('#tablaDesc').innerHTML = tabla(
+    ['Variable','n','Media','Mediana','Desv. est.','CV','Q1','Q3','Mínimo','Máximo'],
+    vs.map(vv=>{
+      const rr=resumen(S.datos.map(d=>d[vv.k]).filter(x=>x!=null&&isFinite(x)));
+      const f=fmtLargo(vv);
+      return [esc(vv.et), rr.n, f(rr.media), f(rr.mediana), f(rr.de), fN(rr.cv,2), f(rr.q1), f(rr.q3), f(rr.min), f(rr.max)];
+    }));
+}
+
+function pintarComparar(){
+  const campo=$('#selGrupo').value, v=varPorK($('#selVarG').value);
+  const gs=porGrupo(campo,v.k,2), fl=fmtLargo(v), fc=fmtDe(v);
+  const nombreG=(agrupables().find(g=>g[0]===campo)||[,campo])[1];
+  $('#grComparar').innerHTML = grBarrasIC(gs.map(g=>({et:g.et, media:g.media, ic:g.ic, n:g.n})),{fmt:fc});
+  $('#tablaGrupos').innerHTML = tabla(['Grupo','n','Media','IC 95 %','Mediana','Desv. est.','CV','Mínimo','Máximo'],
+    gs.map(g=>[esc(g.et),g.n,fl(g.media),fl(g.ic[0])+' a '+fl(g.ic[1]),fl(g.mediana),fl(g.de),fN(g.cv,2),fl(g.min),fl(g.max)]));
+  let out='';
+  if(gs.length<2){ out='<p>Todavía no hay dos grupos con al menos dos respuestas cada uno.</p>'; }
+  else {
+    const av=anova(gs.map(g=>g.vals));
+    const alto=gs[0], bajo=gs[gs.length-1];
+    const w=welch(alto.vals,bajo.vals);
+    out += `<p>Entre ${gs.length} grupos de ${esc(nombreG.toLowerCase())}, el valor más alto es ${esc(alto.et)}
+      (${fl(alto.media)}, n = ${alto.n}) y el más bajo ${esc(bajo.et)} (${fl(bajo.media)}, n = ${bajo.n}):
+      una diferencia de ${fl(alto.media-bajo.media)}${bajo.media?`, es decir ${fN(alto.media/bajo.media,1)} veces`:''}.</p>`;
+    if(av){
+      const sig=av.p<0.05;
+      out += `<p>El análisis de varianza da F(${av.d1}, ${av.d2}) = ${fN(av.F,2)} con p ${av.p<0.001?'< 0,001':'= '+fN(av.p,3)}.
+        ${sig?'Las diferencias entre grupos son mayores que lo esperable por azar':'Las diferencias no alcanzan significancia estadística, así que por ahora no se pueden atribuir al grupo y no conviene titular con ellas'}.
+        El tamaño del efecto (eta cuadrado) es ${fN(av.eta2,2)}: la pertenencia al grupo explica ${fPct(av.eta2,0)} de la variación observada.</p>`;
+    }
+    if(w) out += `<p>Comparando directamente los dos extremos con una prueba t de Welch:
+      t = ${fN(w.t,2)}, gl ≈ ${fN(w.df,1)}, p ${w.p<0.001?'< 0,001':'= '+fN(w.p,3)}, d de Cohen = ${fN(w.d,2)}
+      (${Math.abs(w.d)>0.8?'efecto grande':Math.abs(w.d)>0.5?'efecto mediano':Math.abs(w.d)>0.2?'efecto pequeño':'efecto insignificante'}).</p>`;
+    const chicos=gs.filter(g=>g.n<5);
+    if(chicos.length) out += `<p><em>Cautela:</em> ${chicos.length} grupo${chicos.length>1?'s tienen':' tiene'} menos de cinco respuestas
+      (${chicos.map(g=>esc(g.et)+' n='+g.n).join(', ')}). Sirven para orientar la reportería, no para publicarlos como cifra.</p>`;
+  }
+  $('#pruebaGrupos').innerHTML = out;
+}
+
+function pintarRelaciones(){
+  const vx=varPorK($('#selX').value), vy=varPorK($('#selY').value);
+  const reg=regresion(S.datos.map(d=>[d[vx.k],d[vy.k]]));
+  $('#grDispersion').innerHTML = grDispersion(reg, vx.et, vy.et, {fx:fmtDe(vx), fy:fmtDe(vy)});
+  if(reg){
+    const f=Math.abs(reg.r);
+    const fuerza = f>0.7?'fuerte':f>0.4?'moderada':f>0.2?'débil':'casi nula';
+    const dir = reg.b>0?'sube':'baja';
+    $('#lecturaRel').innerHTML = `<p>La relación entre ${esc(vx.et.toLowerCase())} y ${esc(vy.et.toLowerCase())}
+      es ${fuerza} y ${reg.b>0?'positiva':'negativa'} (r = ${fN(reg.r,2)}, p ${reg.p<0.001?'< 0,001':'= '+fN(reg.p,3)}, n = ${reg.n}).
+      Por cada unidad adicional en el eje horizontal, el eje vertical ${dir} en promedio ${fmtLargo(vy)(Math.abs(reg.b))}.
+      El modelo explica ${fPct(reg.r2,0)} de la variación${reg.r2<0.3?', o sea que la mayor parte de lo que hace variar este gasto está por fuera de esta variable':''}.</p>
+      <p>Correlación no es causa: sirve para orientar preguntas de reportería, no para afirmar que una cosa produce la otra.</p>`;
+  } else $('#lecturaRel').innerHTML='';
+  const vs=variables().filter(v=>['anualTotal','netoAnual','mensualTotal','ingresoAnual','carga','edad','horas','anios','abandono','a_viajes','a_implementos'].includes(v.k));
+  $('#matrizCorr').innerHTML = tabla([''].concat(vs.map(v=>v.et.split(' ').slice(0,3).join(' '))),
+    vs.map(a=>[esc(a.et)].concat(vs.map(b=>{
+      if(a.k===b.k) return '<b>1,00</b>';
+      const r=regresion(S.datos.map(d=>[d[a.k],d[b.k]]));
+      if(!r) return '—';
+      const col = Math.abs(r.r)>0.5 ? (r.r>0?CL.cancha:CL.alerta) : CL.suave;
+      return `<span style="color:${col};font-weight:${Math.abs(r.r)>0.5?600:400}">${fN(r.r,2)}</span>`;
+    }))));
+}
+
+function pintarProyeccion(){
+  const p=P(), d=S.datos;
+  const base=media(d.map(x=>x.anualTotal));
+  const baseMed=mediana(d.map(x=>x.anualTotal));
+  const ahorroPorPersona = p.cubre ? media(d.map(x=> (p.cubre.startsWith('m_')? x[p.cubre]*12 : x[p.cubre]) )) * p.cober : 0;
+  const labels=[], sin=[], con=[];
+  const anioBase=new Date().getFullYear();
+  for(let i=0;i<=p.anios;i++){
+    labels.push(String(anioBase+i));
+    sin.push(base*Math.pow(1+p.ipc,i));
+    con.push(Math.max(0,(base-ahorroPorPersona))*Math.pow(1+p.ipc,i));
+  }
+  const acumSin=suma(sin), acumCon=suma(con);
+  const costoPublico = ahorroPorPersona*p.pobla;
+  const nomRubro = p.cubre ? [...MENS,...ANU].find(([k])=>k===p.cubre)[1] : null;
+  $('#cifrasProy').innerHTML=[
+    [fCOP(sin[sin.length-1]), `Costo anual por deportista en ${labels[labels.length-1]} con inflación de ${fN(p.ipc*100,1)} %`,'cifra'],
+    [fCOP(acumSin), `Lo que gastará una familia en ${p.anios} años sosteniendo la práctica`,'cifra agua'],
+    [fN(base/p.smmlv,1)+' SMMLV', 'Costo anual actual medido en salarios mínimos mensuales','cifra senal'],
+    [p.cubre?fCOP(ahorroPorPersona):'—', p.cubre?`Alivio anual por deportista si el INDER cubriera ${esc(nomRubro.toLowerCase())} al ${fN(p.cober*100,0)} %`:'Elige un rubro para simular el subsidio','cifra'],
+    [p.cubre?fCOP(costoPublico):'—', p.cubre?`Costo anual de esa política para ${fN(p.pobla,0)} deportistas`:'—','cifra alerta'],
+    [p.cubre?fCOP(acumSin-acumCon):'—', p.cubre?`Ahorro acumulado por familia en ${p.anios} años`:'—','cifra agua'],
+  ].map(([n,l,c])=>`<div class="${c}"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+  $('#grProyeccion').innerHTML = grLineas(
+    [{nombre:'Sin intervención',color:CL.tinta,vals:sin}].concat(p.cubre?[{nombre:'Con subsidio',color:CL.cancha,vals:con,guion:true}]:[]),
+    labels);
+  const cargas=d.map(x=>x.carga).filter(x=>x!=null&&isFinite(x));
+  const cargaFin = cargas.length ? media(cargas)*Math.pow(1+p.ipc,p.anios)/Math.pow(1.04,p.anios) : null;
+  $('#lecturaProy').innerHTML = `
+    <p>Con una inflación anual del ${fN(p.ipc*100,1)} %, el costo medio de practicar deporte pasaría de
+    ${fCOP(base)} hoy a ${fCOP(sin[sin.length-1])} en ${labels[labels.length-1]}. Una familia que acompañe
+    a su hijo durante ese periodo completo desembolsará cerca de ${fCOP(acumSin)}, sin contar el costo de oportunidad
+    del tiempo dedicado. Medido contra el deportista mediano (${fCOP(baseMed)} al año) la proyección es más conservadora.</p>
+    ${p.cubre?`<p>Si el INDER asumiera ${esc(nomRubro.toLowerCase())} al ${fN(p.cober*100,0)} %, cada familia se ahorraría
+      ${fCOP(ahorroPorPersona)} al año y ${fCOP(acumSin-acumCon)} en el horizonte completo. Extendido a
+      ${fN(p.pobla,0)} deportistas afiliados en la ciudad, la política costaría del orden de ${fCOP(costoPublico)} anuales:
+      esa es la cifra que vale la pena contrastar con lo que el instituto ya contrató entre 2022 y 2025.</p>`:''}
+    ${cargaFin!=null?`<p>Si los ingresos de los hogares crecen alrededor de 4 % anual, por debajo de la inflación del deporte,
+      el peso sobre el presupuesto familiar pasaría de ${fPct(media(cargas))} a ${fPct(cargaFin)} al final del periodo.</p>`:''}
+    <p style="font-size:14px;color:var(--suave)">Proyección determinista sobre la muestra actual: supone que la
+    composición de gastos y la población encuestada se mantienen. No es un pronóstico, es un escenario.</p>`;
+}
+
+function pintarDiagnostico(){
+  const d=S.datos, p=P();
+  const cargas=d.map(x=>x.carga).filter(x=>x!=null&&isFinite(x));
+  const avisos=[];
+  if(d.length<30) avisos.push(['mal',`Con ${d.length} respuestas la muestra todavía es exploratoria. Por debajo de 30 casos los promedios se mueven mucho con cada respuesta nueva: úsala para encontrar historias, no para publicar cifras de ciudad.`]);
+  if(S.demo) avisos.push(['mal','Estás viendo datos simulados generados por el aplicativo para probar el funcionamiento. Nada de lo que aparece aquí es información real y no puede citarse.']);
+  const sinIngreso = d.length - cargas.length;
+  if(sinIngreso>d.length*0.3) avisos.push(['',`${sinIngreso} de ${d.length} respuestas no permiten calcular el peso sobre el ingreso porque el hogar prefirió no informarlo. Todos los indicadores de barrera se calculan sobre ${cargas.length} casos.`]);
+  const criticos = cargas.filter(c=>c>0.30).length;
+  if(criticos) avisos.push(['',`${criticos} hogares destinan más del 30 % de su ingreso anual al deporte. Es el hallazgo con más potencial periodístico de la muestra.`]);
+  const comGrupos = porGrupo('comuna','anualTotal',1).filter(g=>g.n<5);
+  if(comGrupos.length) avisos.push(['',`Faltan respuestas en ${comGrupos.length} comunas (${comGrupos.slice(0,6).map(g=>esc(g.et)).join(', ')}). Dirigir el formulario hacia allá equilibraría la muestra.`]);
+  $('#semaforo').innerHTML = avisos.map(([c,t])=>`<div class="aviso ${c}">${t}</div>`).join('');
+
+  const filas=[];
+  ['deporte','comuna','estrato'].forEach(campo=>{
+    porGrupo(campo,'carga',2).forEach(g=>{
+      filas.push([ (agrupables().find(a=>a[0]===campo)||[,campo])[1], esc(g.et), g.n,
+        fPct(g.media), fPct(g.mediana),
+        marcaNivel(g.media),
+        `<div class="carga"><i style="width:${Math.min(100,g.media*100/0.5*1).toFixed(0)}%;background:${g.media>0.3?CL.alerta:g.media>0.15?CL.senal:CL.cancha}"></i></div>` ]);
+    });
+  });
+  $('#tablaCarga').innerHTML = filas.length
+    ? tabla(['Dimensión','Grupo','n','Carga media','Carga mediana','Nivel',''], filas)
+    : '<p class="vacio">No hay suficientes respuestas con ingreso declarado para calcular la barrera por grupo.</p>';
+
+  const porDep=porGrupo('deporte','anualTotal',3);
+  const desiguales=[...porDep].sort((a,b)=>b.cv-a.cv).slice(0,3);
+  const porCarga=porGrupo('comuna','carga',3);
+  const textos=d.filter(x=>x.texto && x.texto.length>40 && x.autoriza).length;
+  const inder=d.filter(x=>x.apoyoInder==='Con apoyo del INDER').length;
+  $('#agenda').innerHTML = `
+    <h4>Lo que ya se puede afirmar</h4>
+    <p>${porDep.length?`El costo cambia sustancialmente según el deporte: ${porDep.slice(0,3).map(g=>esc(g.et)+' '+fCOP(g.media)).join(', ')}. `:''}
+    ${porCarga.length?`Medido como porcentaje del ingreso, la comuna donde el deporte pesa más es ${esc(porCarga[0].et)} (${fPct(porCarga[0].media)}), no necesariamente la que más dinero gasta: ahí está el contraste que da la historia.`:''}</p>
+    <h4>Lo que hay que verificar antes de publicar</h4>
+    <p>${desiguales.length?`En ${desiguales.map(g=>esc(g.et)).join(', ')} la variación interna es altísima (CV de ${desiguales.map(g=>fN(g.cv,2)).join('; ')}): antes de dar un promedio hay que entender si son clubes distintos, categorías distintas o errores de reporte. `:''}
+    Contrastar las mensualidades declaradas con las tarifas oficiales de dos o tres clubes por deporte.
+    Pedir a las ligas el número real de afiliados para poder extrapolar.</p>
+    <h4>Siguiente paso de reportería</h4>
+    <p>${inder?`${inder} encuestados dicen recibir apoyo del INDER: sirven para pedir por transparencia el listado de beneficiarios y cruzarlo con los contratos de SECOP II. `:'Ningún encuestado reporta apoyo directo del INDER, lo que ya es un dato: conviene preguntarle al instituto cómo llega su presupuesto al deportista de base. '}
+    ${textos?`Hay ${textos} testimonios autorizados con material citable en la pestaña Voces.`:'Aún no hay testimonios largos autorizados; vale la pena insistir en esa pregunta abierta.'}
+    Con ${d.length} respuestas y ${new Set(d.map(x=>x.club).filter(Boolean)).size} clubes mencionados, la muestra ya permite pedir entrevistas con nombre propio.</p>`;
+}
+
+function pintarVoces(){
+  const q=norm($('#buscaVoz').value||'');
+  const vs=S.datos.filter(d=>d.texto && d.texto.length>15 && d.autoriza)
+    .filter(d=>!q || norm(d.texto).includes(q) || norm(d.deporte).includes(q) || norm(d.comuna).includes(q))
+    .sort((a,b)=>(b.carga||0)-(a.carga||0));
+  $('#listaVoces').innerHTML = vs.length ? vs.map(d=>`
+    <blockquote class="cita">${esc(d.texto)}
+      <cite>${esc(d.deporte||'Deporte sin especificar')} · ${esc(d.comuna||'comuna sin especificar')}${d.estrato?' · estrato '+esc(d.estrato):''}
+        · ${fCOP(d.anualTotal)} al año${d.carga?' · '+fPct(d.carga)+' del ingreso familiar':''}</cite>
+    </blockquote>`).join('')
+    : `<p class="vacio">${q?'Ninguna respuesta contiene esa palabra.':'Todavía no hay respuestas abiertas autorizadas para publicación.'}</p>`;
+}
+
+/* ============ informe ============ */
+function construirInforme(){
+  const d=S.datos, p=P();
+  const r=resumen(d.map(x=>x.anualTotal));
+  const rn=resumen(d.map(x=>x.netoAnual));
+  const cargas=d.map(x=>x.carga).filter(x=>x!=null&&isFinite(x));
+  const rc=resumen(cargas);
+  const porDep=porGrupo('deporte','anualTotal',3);
+  const porCom=porGrupo('comuna','anualTotal',3);
+  const porEst=porGrupo('estrato','anualTotal',2).sort((a,b)=>String(a.et).localeCompare(String(b.et)));
+  const avEst=anova(porEst.map(g=>g.vals));
+  const regIng=regresion(d.map(x=>[x.ingresoAnual,x.anualTotal]));
+  const regCarga=regresion(d.map(x=>[x.ingresoAnual,x.carga]));
+  const rubros=[...MENS.map(([k,et])=>({et,valor:suma(d.map(x=>x[k]))*12})),...ANU.map(([k,et])=>({et,valor:suma(d.map(x=>x[k]))}))].sort((a,b)=>b.valor-a.valor);
+  const totR=suma(rubros.map(x=>x.valor));
+  const conApoyo=d.filter(x=>x.tieneApoyo==='Recibe algún apoyo').length;
+  const faltaron=d.filter(x=>norm(x.falta).startsWith('si')).length;
+  const criticos=cargas.filter(c=>c>0.30).length;
+  const fecha=new Date().toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'});
+
+  let md = `# Cuánto cuesta ser deportista afiliado en Medellín\n\n`;
+  md += `_Análisis de ${d.length} respuestas · generado el ${fecha}${S.demo?' · DATOS SIMULADOS, NO PUBLICABLES':''}_\n\n`;
+  md += `## Hallazgo principal\n\n`;
+  md += `Sostener a un deportista afiliado cuesta una mediana de ${fCOP(r.mediana)} al año, `;
+  md += `equivalente a ${fN(r.mediana/p.smmlv,1)} salarios mínimos mensuales. La media es ${fCOP(r.media)} `;
+  md += `(intervalo de confianza del 95 % entre ${fCOP(r.ic[0])} y ${fCOP(r.ic[1])}) con una desviación estándar de ${fCOP(r.de)} `;
+  md += `y un coeficiente de variación de ${fN(r.cv,2)}. La mitad de las familias gasta entre ${fCOP(r.q1)} y ${fCOP(r.q3)}; `;
+  md += `el caso más costoso de la muestra llega a ${fCOP(r.max)} y el más económico a ${fCOP(r.min)}.\n\n`;
+  if(conApoyo) md += `Descontando becas, patrocinios y apoyos públicos, el costo neto medio baja a ${fCOP(rn.media)}: `
+    + `${conApoyo} de ${d.length} encuestados (${fPct(conApoyo/d.length,0)}) reciben algún tipo de apoyo.\n\n`;
+
+  md += `## En qué se va el dinero\n\n`;
+  rubros.slice(0,6).forEach(x=> md += `- ${x.et}: ${fPct(x.valor/totR,1)} del gasto agregado\n`);
+  md += `\nEl rubro dominante es ${rubros[0].et}, que concentra ${fPct(rubros[0].valor/totR,1)} de todo lo que gastan `;
+  md += `las familias encuestadas. Los gastos que no se pagan mes a mes (uniformes, implementos, torneos, viajes) `;
+  md += `suman ${fPct(suma(ANU.map(([k])=>suma(d.map(x=>x[k]))))/totR,1)} del total, y son los que suelen quedar fuera del presupuesto familiar.\n\n`;
+
+  md += `## Diferencias entre grupos\n\n`;
+  if(porDep.length>1){
+    md += `**Por deporte.** ${porDep[0].et} encabeza con ${fCOP(porDep[0].media)} anuales en promedio (n = ${porDep[0].n}) `;
+    md += `frente a ${fCOP(porDep[porDep.length-1].media)} de ${porDep[porDep.length-1].et}: `;
+    md += `una brecha de ${fN(porDep[0].media/(porDep[porDep.length-1].media||1),1)} veces. `;
+    const av=anova(porDep.map(g=>g.vals));
+    if(av) md += `El análisis de varianza confirma que las diferencias entre disciplinas ${av.p<0.05?'son estadísticamente significativas':'no alcanzan significancia estadística con la muestra actual'} `
+      + `(F(${av.d1}, ${av.d2}) = ${fN(av.F,2)}; p ${av.p<0.001?'< 0,001':'= '+fN(av.p,3)}; eta² = ${fN(av.eta2,2)}).`;
+    md += `\n\n`;
+  }
+  if(porCom.length>1) md += `**Por territorio.** El gasto medio más alto se registra en ${porCom[0].et} (${fCOP(porCom[0].media)}) `
+    + `y el más bajo en ${porCom[porCom.length-1].et} (${fCOP(porCom[porCom.length-1].media)}).\n\n`;
+  if(porEst.length>1 && avEst) md += `**Por estrato.** ${avEst.p<0.05?'El estrato sí discrimina el gasto':'El estrato no discrimina el gasto de manera concluyente'} `
+    + `(F(${avEst.d1}, ${avEst.d2}) = ${fN(avEst.F,2)}; p ${avEst.p<0.001?'< 0,001':'= '+fN(avEst.p,3)}), `
+    + `y explica ${fPct(avEst.eta2,0)} de la variación total.\n\n`;
+
+  md += `## La barrera económica\n\n`;
+  if(rc.n){
+    md += `Sobre ${rc.n} hogares que informaron ingresos, el deporte absorbe en promedio ${fPct(rc.media)} `;
+    md += `del ingreso anual familiar (mediana ${fPct(rc.mediana)}). `;
+    if(criticos) md += `En ${criticos} casos supera el 30 %, umbral en el que la práctica deportiva compite directamente con gastos básicos del hogar. `;
+    if(regCarga && regCarga.p<0.05) md += `La carga cae a medida que sube el ingreso (r = ${fN(regCarga.r,2)}; p ${regCarga.p<0.001?'< 0,001':'= '+fN(regCarga.p,3)}), `
+      + `de modo que el mismo deporte pesa mucho más en los hogares de menores ingresos aunque gasten menos en términos absolutos. `;
+    if(regIng) md += `El gasto absoluto sí crece con el ingreso (r = ${fN(regIng.r,2)}; r² = ${fN(regIng.r2,2)}), `
+      + `lo que sugiere que las familias ajustan la práctica a lo que pueden pagar más que a lo que el deporte exige.`;
+    md += `\n\n`;
+  }
+  if(faltaron) md += `${faltaron} de ${d.length} deportistas (${fPct(faltaron/d.length,0)}) reportan haber faltado a entrenamientos `
+    + `o competencias por falta de dinero.\n\n`;
+
+  md += `## Proyección\n\n`;
+  const base=r.media, fin=base*Math.pow(1+p.ipc,p.anios);
+  md += `Con una inflación anual del ${fN(p.ipc*100,1)} %, el costo medio pasaría de ${fCOP(base)} a ${fCOP(fin)} en ${p.anios} años. `;
+  md += `Sostener a un deportista durante ese periodo completo cuesta alrededor de ${fCOP(suma(Array.from({length:p.anios+1},(_,i)=>base*Math.pow(1+p.ipc,i))))}. `;
+  if(p.cubre){
+    const nom=[...MENS,...ANU].find(([k])=>k===p.cubre)[1];
+    const ah=media(d.map(x=> p.cubre.startsWith('m_')? x[p.cubre]*12 : x[p.cubre]))*p.cober;
+    md += `Si el INDER asumiera ${nom.toLowerCase()} al ${fN(p.cober*100,0)} %, cada familia ahorraría ${fCOP(ah)} al año; `;
+    md += `extendido a ${fN(p.pobla,0)} deportistas la política costaría cerca de ${fCOP(ah*p.pobla)} anuales.`;
+  }
+  md += `\n\n## Ficha metodológica\n\n`;
+  md += `- Instrumento: encuesta autodiligenciada en Google Forms, difundida entre deportistas de Medellín y sus familias.\n`;
+  md += `- Unidad de análisis: el deportista.\n`;
+  md += `- Respuestas procesadas: ${d.length}. Fuente del archivo: ${S.fuente}.\n`;
+  md += `- Cobertura: ${new Set(d.map(x=>x.deporte).filter(Boolean)).size} deportes y ${new Set(d.map(x=>x.comuna).filter(Boolean)).size} comunas o corregimientos.\n`;
+  md += `- Muestreo no probabilístico por conveniencia: los resultados describen a quienes respondieron y no son representativos del universo de deportistas afiliados de la ciudad.\n`;
+  md += `- Los ingresos se recogieron en rangos de salarios mínimos y se convirtieron al punto medio de cada rango, con un salario mínimo de ${fCOP(p.smmlv)}.\n`;
+  md += `- El costo anual total suma los gastos mensuales multiplicados por doce más los gastos anuales declarados.\n`;
+  md += `- Pruebas aplicadas: análisis de varianza de un factor, prueba t de Welch, correlación de Pearson y regresión por mínimos cuadrados. Nivel de significancia 0,05.\n`;
+  md += `- Los valores atípicos se identifican con el criterio de 1,5 rangos intercuartílicos y se conservan en los cálculos salvo indicación contraria.\n`;
+  if(S.demo) md += `- **Advertencia: este informe se generó con datos simulados por el aplicativo para pruebas. No es información real.**\n`;
+  return md;
+}
+function md2html(md){
+  return md.split('\n').map(l=>{
+    if(/^### /.test(l)) return `<h4>${esc(l.slice(4))}</h4>`;
+    if(/^## /.test(l)) return `<h4>${esc(l.slice(3))}</h4>`;
+    if(/^# /.test(l)) return `<p class="lede">${esc(l.slice(2))}</p>`;
+    if(/^- /.test(l)) return `<p style="margin:0 0 .3em .9em">· ${inl(l.slice(2))}</p>`;
+    if(!l.trim()) return '';
+    return `<p>${inl(l)}</p>`;
+  }).join('');
+}
+const inl = t => esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/_(.+?)_/g,'<em style="background:none;font-style:italic">$1</em>');
+function pintarInforme(){ S.md=construirInforme(); $('#informe').innerHTML=md2html(S.md); }
+
+/* ============ profundizar con IA ============ */
+async function profundizar(){
+  const btn=$('#btnIA'), msg=$('#msgIA');
+  btn.disabled=true; msg.textContent='Analizando…';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:
+`Eres editor de una unidad de datos de un medio colombiano. Abajo va el informe automático de una encuesta sobre el costo de practicar deporte afiliado en Medellín, hecha por un estudiante para una investigación sobre los apoyos del INDER entre 2022 y 2025.
+
+Responde en español, en prosa, sin listas ni títulos, en máximo cuatro párrafos:
+1. Cuál es el ángulo periodístico más fuerte y qué titular tentativo saldría.
+2. Qué afirmación del informe NO se sostiene con esta muestra y por qué.
+3. Qué dos fuentes documentales o humanas hay que buscar para cerrar la historia.
+Sé concreto y crítico. No repitas cifras que ya están en el informe salvo las imprescindibles.
+
+INFORME:
+${S.md}`}]})});
+    const data=await res.json();
+    if(data.error) throw new Error(data.error.message||'error de la API');
+    const txt=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+    $('#salidaIA').innerHTML = md2html(txt);
+    $('#cajaIA').hidden=false; msg.textContent='';
+    $('#cajaIA').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(e){
+    msg.textContent='No se pudo conectar. Esta función solo trabaja con el archivo abierto dentro de Claude.';
+  }
+  btn.disabled=false;
+}
+
+/* ============ mapeo y carga ============ */
+function pintarMapeo(){
+  const faltan=CAMPOS.filter(c=>!S.mapa[c.k]);
+  $('#avisoMapeo').innerHTML = faltan.length
+    ? `Se reconocieron ${CAMPOS.length-faltan.length} de ${CAMPOS.length} campos. Sin correspondencia: ${faltan.map(c=>esc(c.et)).join(', ')}. Asígnalos abajo o déjalos vacíos si el formulario no los incluye.`
+    : `Los ${CAMPOS.length} campos del instrumento se reconocieron correctamente.`;
+  $('#mapeo').innerHTML = CAMPOS.map(c=>`
+    <div class="par${S.mapa[c.k]?'':' sin'}">
+      <span>${esc(c.et)}</span>
+      <select data-k="${c.k}">
+        <option value="">— sin usar —</option>
+        ${S.cab.map(h=>`<option value="${esc(h)}"${S.mapa[c.k]===h?' selected':''}>${esc(h.length>52?h.slice(0,52)+'…':h)}</option>`).join('')}
+      </select>
+    </div>`).join('');
+  $$('#mapeo select').forEach(s=> s.onchange=()=>{
+    S.mapa[s.dataset.k]=s.value||undefined;
+    s.closest('.par').classList.toggle('sin',!s.value);
+  });
+  const cols=S.cab.slice(0,9);
+  $('#previa').innerHTML = tabla(cols.map(c=>c.length>26?c.slice(0,26)+'…':c),
+    S.filas.slice(0,6).map(f=>cols.map(c=>esc(String(f[c]??'').slice(0,32)))));
+}
+function recibir(texto, fuente){
+  const {cab, filas} = leerCSV(texto);
+  if(!cab.length || !filas.length){ alert('El archivo no trae filas legibles. Revisa que sea el CSV de respuestas.'); return; }
+  S.cab=cab; S.filas=filas; S.fuente=fuente; S.demo=(fuente==='datos simulados');
+  S.mapa=autodetectar(cab);
+  $('#zonaMapeo').hidden=false; pintarMapeo();
+  $('#zonaMapeo').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function ir(v){
+  $$('nav.mod button').forEach(b=> b.setAttribute('aria-current', String(b.dataset.v===v)));
+  $$('section.vista').forEach(s=> s.classList.toggle('activa', s.id==='v-'+v));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* ============ eventos ============ */
+$$('nav.mod button').forEach(b=> b.onclick=()=>ir(b.dataset.v));
+$('#btnArchivo').onclick=()=>$('#archivo').click();
+$('#archivo').onchange=e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const lector=new FileReader();
+  lector.onload=()=>recibir(lector.result, f.name);
+  lector.readAsText(f,'UTF-8');
+};
+$('#btnPegar').onclick=()=>{ $('#cajaPegar').hidden=!$('#cajaPegar').hidden; $('#areaPegar').focus(); };
+$('#btnLeerPegado').onclick=()=>{ const t=$('#areaPegar').value.trim(); if(t) recibir(t,'texto pegado'); };
+$('#btnDemo').onclick=()=>{
+  const {cab,filas}=demo();
+  S.cab=cab; S.filas=filas; S.fuente='datos simulados'; S.demo=true;
+  S.mapa=autodetectar(cab);
+  $('#zonaMapeo').hidden=false; pintarMapeo();
+  $('#zonaMapeo').scrollIntoView({behavior:'smooth',block:'start'});
+};
+const soltar=$('#soltar');
+['dragenter','dragover'].forEach(ev=> soltar.addEventListener(ev,e=>{e.preventDefault();soltar.classList.add('encima');}));
+['dragleave','drop'].forEach(ev=> soltar.addEventListener(ev,e=>{e.preventDefault();soltar.classList.remove('encima');}));
+soltar.addEventListener('drop',e=>{
+  const f=e.dataTransfer.files[0]; if(!f) return;
+  const lector=new FileReader(); lector.onload=()=>recibir(lector.result,f.name); lector.readAsText(f,'UTF-8');
+});
+function variantesURL(u){
+  const v=[];
+  const id=(u.match(/\/spreadsheets\/d\/e\/([\w-]+)/)||[])[1];
+  const idc=(u.match(/\/spreadsheets\/d\/([\w-]{20,})/)||[])[1];
+  const gid=(u.match(/[?&]gid=(\d+)/)||u.match(/#gid=(\d+)/)||[])[1];
+  if(/output=csv/.test(u)) v.push(u);
+  if(id){
+    const base='https://docs.google.com/spreadsheets/d/e/'+id+'/pub';
+    v.push(base+'?output=csv'+(gid?'&gid='+gid+'&single=true':''));
+  }
+  if(idc){
+    const base='https://docs.google.com/spreadsheets/d/'+idc;
+    v.push(base+'/gviz/tq?tqx=out:csv'+(gid?'&gid='+gid:''));
+    v.push(base+'/export?format=csv'+(gid?'&gid='+gid:''));
+  }
+  if(!v.length) v.push(u);
+  return [...new Set(v)];
+}
+$('#btnUrl').onclick=async()=>{
+  const u=$('#urlHoja').value.trim(); if(!u) return;
+  const msg=$('#msgUrl');
+  if(!/docs\.google\.com/.test(u)){ msg.textContent='Ese enlace no es de Hojas de cálculo de Google.'; return; }
+  msg.textContent='Descargando…';
+  let bloqueoRed=false, htmlRecibido=false, ultimo='';
+  for(const url of variantesURL(u)){
+    try{
+      const res=await fetch(url);
+      if(!res.ok){ ultimo='estado '+res.status; continue; }
+      const txt=await res.text();
+      if(txt.trim().startsWith('<')){ htmlRecibido=true; continue; }
+      if(!txt.trim()){ ultimo='archivo vacío'; continue; }
+      msg.textContent='';
+      recibir(txt,'hoja publicada');
+      return;
+    }catch(e){
+      if(e instanceof TypeError) bloqueoRed=true;
+      ultimo=e.message||'error';
+    }
+  }
+  if(bloqueoRed){
+    msg.innerHTML='El navegador bloqueó la conexión con Google. Pasa si abriste esta página dentro de Claude, '
+      +'donde las conexiones externas están restringidas: descarga el archivo y ábrelo desde tu equipo, '
+      +'o usa el botón de abajo para soltar el CSV directamente.';
+  } else if(htmlRecibido){
+    msg.innerHTML='Google devolvió una página web en vez de datos. La hoja no está publicada como CSV: '
+      +'entra a Archivo › Compartir › Publicar en la web, elige la hoja de respuestas y el formato '
+      +'«Valores separados por comas».';
+  } else {
+    msg.textContent='No se pudo leer la hoja ('+ultimo+'). Revisa que el enlace apunte a la hoja de respuestas publicada.';
+  }
+};
+$('#btnRecordar').onclick=()=>{
+  try{ localStorage.setItem('urlHoja',$('#urlHoja').value.trim()); $('#msgUrl').textContent='Enlace guardado en este dispositivo.'; }
+  catch(e){ $('#msgUrl').textContent='Este navegador no permite guardar el enlace.'; }
+};
+$('#btnAuto').onclick=()=>{ S.mapa=autodetectar(S.cab); pintarMapeo(); };
+$('#btnProcesar').onclick=()=>{
+  procesar();
+  if(!S.listo){ alert('No se pudo construir ninguna fila. Revisa el mapeo de columnas.'); return; }
+  pintarTodo(); ir('panorama');
+};
+$('#selVar').onchange=pintarDescriptivos;
+$('#selGrupo').onchange=pintarComparar;
+$('#selVarG').onchange=pintarComparar;
+$('#selX').onchange=pintarRelaciones;
+$('#selY').onchange=pintarRelaciones;
+['pIpc','pAnios','pSmmlv','pPobla','pCubre','pCober'].forEach(id=> $('#'+id).oninput=()=>{
+  if(!S.listo) return;
+  if(id==='pSmmlv'){ procesar(); pintarPanorama(); pintarDiagnostico(); }
+  pintarProyeccion(); pintarInforme();
+});
+$('#buscaVoz').oninput=pintarVoces;
+$('#btnIA').onclick=profundizar;
+$('#btnCopiar').onclick=async()=>{
+  try{ await navigator.clipboard.writeText(S.md); $('#msgIA').textContent='Informe copiado.'; }
+  catch(e){ $('#msgIA').textContent='Selecciona el texto y cópialo manualmente.'; }
+};
+$('#btnDescargar').onclick=()=>{
+  const b=new Blob([S.md],{type:'text/markdown;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download='informe-costos-deportistas.md'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+};
+try{ const g=localStorage.getItem('urlHoja'); if(g){ $('#urlHoja').value=g; } }catch(e){}
+
+</script>
+</body>
+</html>
