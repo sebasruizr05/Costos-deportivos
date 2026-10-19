@@ -119,10 +119,10 @@ svg.gr{width:100%;height:auto;display:block;font-family:var(--sans)}
 <body>
 
 <header class="top">
-  <div class="marca">Instrumento de investigación · INDER 2022–2025</div>
+  <div class="marca">Recortados · Producción y Géneros Periodísticos III · UdeA</div>
   <h1>Cuánto cuesta competir</h1>
-  <div class="sub">Encuesta a deportistas de Medellín y sus familias, analizada de punta a punta:
-    descriptivos, comparaciones entre comunas y deportes, proyecciones y redacción de hallazgos.</div>
+  <div class="sub">Encuesta a gimnastas de Medellín y sus familias, analizada de punta a punta:
+    descriptivos, comparaciones entre comunas y modalidades, proyecciones y redacción de hallazgos.</div>
   <div class="estado" id="estado">
     <span>Sin datos cargados</span>
   </div>
@@ -154,7 +154,7 @@ svg.gr{width:100%;height:auto;display:block;font-family:var(--sans)}
   <div class="tarjeta">
     <h3>Enlace de la hoja publicada</h3>
     <div class="control">
-      <input type="text" id="urlHoja" placeholder="https://docs.google.com/spreadsheets/d/e/…/pub?output=csv">
+      <input type="text" id="urlHoja" placeholder="…/exec  o  …/pub?output=csv">
     </div>
     <div class="fila">
       <button class="btn" id="btnUrl">Cargar desde el enlace</button>
@@ -162,7 +162,9 @@ svg.gr{width:100%;height:auto;display:block;font-family:var(--sans)}
       <span id="msgUrl" style="font-size:13px;color:var(--suave)"></span>
     </div>
     <p style="font-size:13px;color:var(--suave);margin:12px 0 0;font-family:var(--serif)">
-      En la hoja: Archivo › Compartir › Publicar en la web › hoja de respuestas › formato CSV.</p>
+      Acepta dos cosas: el CSV publicado de la hoja (Archivo › Compartir › Publicar en la web) o la dirección
+      terminada en /exec de la aplicación web creada con el script «publicar-respuestas.gs». La segunda funciona
+      aunque abras este archivo desde tu disco; la primera solo si lo abres desde un sitio web.</p>
   </div>
 
   <div class="soltar" id="soltar">
@@ -272,7 +274,7 @@ svg.gr{width:100%;height:auto;display:block;font-family:var(--sans)}
       <div class="control"><label class="campo" for="pIpc">Inflación anual esperada (%)</label><input type="number" id="pIpc" value="5.2" step="0.1"></div>
       <div class="control"><label class="campo" for="pAnios">Horizonte (años)</label><input type="number" id="pAnios" value="5" min="1" max="15"></div>
       <div class="control"><label class="campo" for="pSmmlv">Salario mínimo mensual (COP)</label><input type="number" id="pSmmlv" value="1623500" step="1000"></div>
-      <div class="control"><label class="campo" for="pPobla">Deportistas afiliados en la ciudad (estimado)</label><input type="number" id="pPobla" value="12000" step="500"></div>
+      <div class="control"><label class="campo" for="pPobla">Gimnastas afiliados en la ciudad (estimado)</label><input type="number" id="pPobla" value="600" step="50"></div>
       <div class="control"><label class="campo" for="pCubre">Rubro que asumiría el INDER</label><select id="pCubre"></select></div>
       <div class="control"><label class="campo" for="pCober">Cobertura del subsidio (%)</label><input type="number" id="pCober" value="100" min="0" max="100"></div>
     </div>
@@ -327,7 +329,7 @@ svg.gr{width:100%;height:auto;display:block;font-family:var(--sans)}
 'use strict';
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
-const S = { cab:[], filas:[], mapa:{}, datos:[], listo:false, demo:false, fuente:'' };
+const S = { cab:[], filas:[], mapa:{}, datos:[], listo:false, demo:false, fuente:'', sinAutorizar:0 };
 
 /* ============ formato ============ */
 const fCOP = n => (n==null||!isFinite(n)) ? '—' : '$' + Math.round(n).toLocaleString('es-CO');
@@ -488,7 +490,7 @@ function leerCSV(texto){
 const CAMPOS = [
   {k:'quien', et:'Quién responde', tipo:'cat', cl:['quien responde']},
   {k:'edad', et:'Edad', tipo:'num', cl:['edad']},
-  {k:'genero', et:'Género', tipo:'cat', cl:['genero','sexo']},
+  {k:'genero', et:'Sexo del deportista', tipo:'cat', cl:['sexo del deportista','genero','sexo']},
   {k:'comuna', et:'Comuna o corregimiento', tipo:'cat', cl:['comuna','corregimiento']},
   {k:'barrio', et:'Barrio', tipo:'cat', cl:['barrio']},
   {k:'estrato', et:'Estrato', tipo:'cat', cl:['estrato']},
@@ -504,7 +506,7 @@ const CAMPOS = [
   {k:'m_alimentacion', et:'Alimentación y suplementos (mes)', tipo:'num', cl:['alimentacion','suplemento']},
   {k:'m_entrenador', et:'Entrenador particular (mes)', tipo:'num', cl:['entrenador o clases','clases particulares']},
   {k:'m_medico', et:'Servicios médicos (mes)', tipo:'num', cl:['servicios medicos','fisioterapia','seguro deportivo']},
-  {k:'m_otros', et:'Otros gastos (mes)', tipo:'num', cl:['otros gastos mensuales']},
+  {k:'m_otros', et:'Otros gastos (mes)', tipo:'num', cl:['otros gastos del deporte','otros gastos']},
   {k:'a_afiliacion', et:'Afiliación anual a la liga', tipo:'num', cl:['afiliacion o inscripcion anual','inscripcion anual']},
   {k:'a_carne', et:'Carné o registro (año)', tipo:'num', cl:['carne','registro o licencia']},
   {k:'a_uniformes', et:'Uniformes (año)', tipo:'num', cl:['uniforme']},
@@ -515,11 +517,12 @@ const CAMPOS = [
   {k:'ingreso', et:'Ingreso del hogar', tipo:'cat', cl:['ingreso mensual del hogar','ingreso']},
   {k:'apoyos', et:'Apoyos que recibe', tipo:'cat', cl:['apoyos que recibe','apoyo']},
   {k:'valorApoyo', et:'Valor mensual de los apoyos', tipo:'num', cl:['valor mensual aproximado']},
-  {k:'falta', et:'Ha faltado por dinero', tipo:'cat', cl:['ha faltado','falta de dinero']},
+  {k:'valorApoyoAnual', et:'Valor anual de los apoyos', tipo:'num', cl:['valor anual aproximado']},
+  {k:'falta', et:'Ha faltado por dinero', tipo:'cat', cl:['has faltado','ha faltado','falta de dinero']},
   {k:'abandono', et:'Cercanía al abandono (1-5)', tipo:'num', cl:['abandonar el deporte','abandono']},
   {k:'gastoPesa', et:'Gasto que más pesa', tipo:'cat', cl:['gasto que mas pesa','mas pesa']},
   {k:'texto', et:'Respuesta abierta', tipo:'texto', cl:['mas dificil de costear','dificil de costear']},
-  {k:'consent', et:'Autoriza uso de respuestas', tipo:'cat', cl:['autoriza']},
+  {k:'consent', et:'Autorización de tratamiento de datos', tipo:'cat', cl:['autorizas el tratamiento','autorizacion para el tratamiento','autoriza']},
 ];
 const MENS = [['m_mensualidad','Mensualidad del club'],['m_transporte','Transporte'],['m_alimentacion','Alimentación y suplementos'],['m_entrenador','Entrenador particular'],['m_medico','Servicios médicos'],['m_otros','Otros gastos']];
 const ANU = [['a_afiliacion','Afiliación a la liga'],['a_carne','Carné y registro'],['a_uniformes','Uniformes'],['a_implementos','Implementos'],['a_torneos','Inscripciones a torneos'],['a_viajes','Viajes por competencias'],['a_examenes','Exámenes médicos']];
@@ -570,11 +573,11 @@ function procesar(){
     CAMPOS.forEach(c=> d[c.k] = m[c.k] ? String(f[m[c.k]]??'').trim() : '');
     MENS.forEach(([k])=> d[k]=num(f,k));
     ANU.forEach(([k])=> d[k]=num(f,k));
-    ['edad','anios','horas','abandono','valorApoyo'].forEach(k=> d[k]=parseNum(val(f,k)));
+    ['edad','anios','horas','abandono','valorApoyo','valorApoyoAnual'].forEach(k=> d[k]=parseNum(val(f,k)));
     d.mensualTotal = suma(MENS.map(([k])=>d[k]));
     d.anualExtras = suma(ANU.map(([k])=>d[k]));
     d.anualTotal = d.mensualTotal*12 + d.anualExtras;
-    d.apoyoAnual = (d.valorApoyo||0)*12;
+    d.apoyoAnual = (d.valorApoyo||0)*12 + (d.valorApoyoAnual||0);
     d.netoAnual = Math.max(0, d.anualTotal - d.apoyoAnual);
     const sm = ingresoSMMLV(d.ingreso);
     d.ingresoMes = sm!=null ? sm*smmlv : null;
@@ -588,66 +591,69 @@ function procesar(){
     d.autoriza = !m.consent ? true : norm(d.consent).startsWith('si');
     return d;
   }).filter(d => d.anualTotal>0 || d.deporte);
+  const antes=S.datos.length;
+  S.datos = S.datos.filter(d => d.autoriza);
+  S.sinAutorizar = antes - S.datos.length;
   S.listo = S.datos.length>0;
 }
 
 /* ============ datos simulados ============ */
-function demo(n=210){
-  const perfiles = {
-    'Natación':[220000,1.4], 'Fútbol':[95000,1.0], 'Patinaje':[180000,1.5], 'Baloncesto':[110000,.9],
-    'Voleibol':[90000,.8], 'Atletismo':[70000,.9], 'Ciclismo':[160000,1.9], 'Taekwondo':[105000,1.0],
-    'Tenis':[320000,1.6], 'Gimnasia':[190000,1.2], 'Judo':[100000,.9], 'Boxeo':[80000,.8], 'Porrismo':[210000,1.3]
-  };
+function demo(n=180){
+  const perfiles = { 'Gimnasia artística':[210000,1.0], 'Gimnasia rítmica':[195000,1.35] };
   const comunas=['1 Popular','3 Manrique','5 Castilla','6 Doce de Octubre','7 Robledo','8 Villa Hermosa','10 La Candelaria','11 Laureles-Estadio','13 San Javier','14 El Poblado','16 Belén','60 San Cristóbal'];
   const estratoPorComuna={'14 El Poblado':5.4,'11 Laureles-Estadio':4.6,'16 Belén':3.4,'10 La Candelaria':3.0,'5 Castilla':2.8,'7 Robledo':2.5,'8 Villa Hermosa':2.1,'3 Manrique':2.0,'13 San Javier':1.9,'6 Doce de Octubre':1.9,'1 Popular':1.5,'60 San Cristóbal':1.9};
   const ingresos=['Menos de 1 salario mínimo','Entre 1 y 2 salarios mínimos','Entre 2 y 3 salarios mínimos','Entre 3 y 5 salarios mínimos','Entre 5 y 8 salarios mínimos','Más de 8 salarios mínimos'];
-  const frases=['Lo más duro son los viajes: cada torneo fuera de la ciudad son dos semanas de mercado.','Los uniformes se cambian cada año y toca comprarlos completos aunque el anterior sirva.','El transporte diario hasta la unidad deportiva se lleva la mitad de lo que gasto en el deporte.','Los patines se dañan cada temporada y no hay dónde repararlos barato.','La mensualidad la puedo pagar, lo que no puedo son las inscripciones cuando caen tres torneos seguidos.','Nos toca hacer rifas entre las familias del club para poder viajar a los nacionales.','Cuando subió la mensualidad tuve que sacar a uno de mis dos hijos del club.','Los exámenes médicos que exige la liga no los cubre la EPS y hay que pagarlos cada año.'];
+  const frases=['Lo más duro son los viajes: cada competencia fuera de la ciudad son dos semanas de mercado.','Los leotardos de competencia se dañan en una temporada y uno nuevo vale más que la mensualidad.','El transporte diario hasta el coliseo se lleva la mitad de lo que gasto en el deporte.','Las cintas y los aros hay que reponerlos todo el tiempo y no se consiguen baratos aquí.','La mensualidad la puedo pagar, lo que no puedo son las inscripciones cuando caen tres torneos seguidos.','Hacemos rifas entre las mamás del club para poder viajar a los nacionales.','Cuando subió la mensualidad tuve que sacar a una de mis dos hijas del club.','Los exámenes médicos que exige la liga no los cubre la EPS y hay que pagarlos cada año.','El magnesio, las vendas y los protectores de muñeca parecen poquito, pero sumados son otra mensualidad.'];
+  const clubes=['Club Gimnasia Aburrá','Club Altair','Liga de Gimnasia de Antioquia','Club Formativo Nutibara','Club Gimnástico Santa Elena'];
   const rnd=(a,b)=>a+Math.random()*(b-a);
   const gauss=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
   const pick=a=>a[Math.floor(Math.random()*a.length)];
   const filas=[];
   for(let i=0;i<n;i++){
-    const dep=pick(Object.keys(perfiles)), [base,mult]=perfiles[dep];
+    const dep=Math.random()<0.58?'Gimnasia artística':'Gimnasia rítmica', [base,mult]=perfiles[dep];
     const com=pick(comunas), est=Math.max(1,Math.min(6,Math.round(estratoPorComuna[com]+gauss()*0.6)));
-    const cap=0.55+est*0.16;
-    const men=Math.max(0,Math.round((base*cap*(1+gauss()*.2))/1000)*1000);
+    const cap=0.6+est*0.14;
     const r=v=>Math.max(0,Math.round(v/1000)*1000);
     const ingIdx=Math.max(0,Math.min(5,Math.round((est-1)*0.9+gauss()*0.7)));
+    const recibeApoyo=Math.random()<.26;
     filas.push({
-      'Marca temporal':'2026-0'+(1+i%9)+'-15',
-      'Quién responde esta encuesta':pick(['El propio deportista','Madre, padre o acudiente','Entrenador o directivo del club']),
-      'Edad del deportista':Math.round(rnd(8,24)),
-      'Género del deportista':Math.random()<.46?'Mujer':'Hombre',
+      'Marca temporal':'2026-'+String(1+i%10).padStart(2,'0')+'-15',
+      '¿Autorizas el tratamiento de tus datos personales en los términos descritos?':Math.random()<.97?'Si autorizo':'No autorizo',
+      'Quién responde esta encuesta':Math.random()<.42?'El propio deportista':'Madre, padre o acudiente',
+      'Escribe tu edad en años cumplidos. Ejemplo: si tienes 18 años, escribe simplemente 18)':Math.round(rnd(7,22)),
+      'Sexo del deportista':Math.random()<.88?'Mujer':'Hombre',
       'Comuna o corregimiento de residencia':com,
-      'Estrato socioeconómico de la vivienda':String(est),
+      'Escribe el nombre de tu barrio':'',
+      'Estrato socioeconómico de tu vivienda':String(est),
       'Deporte principal':dep,
-      'Nombre del club o liga':'Club '+dep+' '+pick(['Antioquia','Medellín','Aburrá','Nororiental']),
-      'Está afiliado a una liga deportiva':Math.random()<.82?'Sí':'No',
-      'Categoría en la que compite':pick(['Formativa o infantil','Juvenil','Mayores']),
-      'Años que lleva practicando el deporte':Math.round(rnd(1,12)),
-      'Horas de entrenamiento por semana':Math.round(rnd(4,20)),
-      'Dónde entrena habitualmente':est<=2?pick(['Escenario público del INDER','Escenario público del INDER','Espacio público (calle, parque, cancha de barrio)','Combina varios']):pick(['Escenario privado o del club','Escenario público del INDER','Combina varios']),
-      'Mensualidad al club o liga':men,
-      'Transporte a entrenamientos y competencias':r(rnd(40000,180000)*(est<=2?1.15:.9)),
-      'Alimentación especializada o suplementos':r(rnd(0,160000)*cap),
-      'Entrenador o clases particulares':Math.random()<.25?r(rnd(80000,400000)*cap):0,
-      'Servicios médicos, fisioterapia o seguro deportivo':r(rnd(0,120000)*cap),
-      'Otros gastos mensuales del deporte':r(rnd(0,70000)),
-      'Afiliación o inscripción anual a la liga':r(rnd(50000,300000)*mult),
+      'Está afiliado a una liga deportiva':Math.random()<.86?'Sí':'No',
+      'Nombre del club o liga':pick(clubes),
+      'Categoría en la que compites':pick(['Formativa o infantil','Formativa o infantil','Juvenil','Mayores','No compite, solo entrena']),
+      'Años que llevas practicando el deporte como afiliado a liga':Math.round(rnd(1,11)),
+      'Horas de entrenamiento por semana':Math.round(rnd(6,24)),
+      'Dónde entrenas habitualmente':est<=2?pick(['Escenario público del INDER','Escenario público del INDER','Instalación de un colegio o universidad','Combina varios']):pick(['Escenario privado o del club','Escenario público del INDER','Combina varios']),
+      'Mensualidad al club o liga':r(base*cap*(1+gauss()*.2)),
+      'Transporte a entrenamientos y competencias al mes':r(rnd(50000,190000)*(est<=2?1.15:.9)),
+      'Alimentación especializada o suplementos al mes':r(rnd(0,150000)*cap),
+      'Entrenador o clases particulares al mes ':Math.random()<.22?r(rnd(120000,420000)*cap):0,
+      'Servicios médicos, fisioterapia o seguro deportivo mensual':r(rnd(0,130000)*cap),
+      'Otros gastos del deporte mensual':r(rnd(0,60000)),
+      'Afiliación o inscripción anual a la liga o club.Este valor debe ser adicional a lo que cobra el club o liga.':r(rnd(80000,350000)),
       'Carné, registro o licencia deportiva':r(rnd(20000,90000)),
-      'Uniformes y ropa deportiva en el año':r(rnd(120000,480000)*mult),
-      'Implementos y equipamiento en el año':r(rnd(60000,1100000)*mult*cap),
-      'Inscripciones a torneos en el año':r(rnd(80000,600000)*mult),
-      'Viajes y hospedaje por competencias en el año':r(rnd(0,1500000)*mult*cap),
-      'Exámenes médicos y valoraciones en el año':r(rnd(60000,260000)),
+      'Uniformes y ropa deportiva en el año. No incluyas los implementos o equipamientos. Sobre esto te consultaremos en la siguiente pregunta.':r(rnd(180000,760000)*mult),
+      'Implementos y equipamiento en el año':r(rnd(140000,980000)*mult*cap),
+      'Inscripciones a torneos en el año':r(rnd(90000,620000)*mult),
+      'Viajes y hospedaje por competencias en el año':r(rnd(0,1900000)*mult*cap),
+      'Exámenes médicos y valoraciones en el año':r(rnd(60000,250000)),
       'Ingreso mensual del hogar':ingresos[ingIdx],
-      'Apoyos que recibe actualmente':Math.random()<.28?pick(['Beca o descuento del club o liga','Apoyo del INDER','Apoyo de Indeportes Antioquia o Comité Olímpico','Patrocinio de una empresa','Beca o descuento del club o liga, Apoyo del INDER']):'Ninguno',
-      'Valor mensual aproximado de esos apoyos':Math.random()<.28?r(rnd(50000,400000)):0,
-      'Ha faltado a entrenamientos o competencias por falta de dinero':est<=2?pick(['Sí, con frecuencia','Sí, alguna vez','Sí, alguna vez','Nunca']):pick(['Sí, alguna vez','Nunca','Nunca']),
-      'Qué tan cerca ha estado de abandonar el deporte por costos':Math.max(1,Math.min(5,Math.round(4.4-est*0.45+gauss()*0.9))),
-      'El gasto que más pesa en el presupuesto':pick(['Mensualidad del club','Transporte','Uniformes e implementos','Inscripciones a torneos','Viajes por competencias','Alimentación y suplementos']),
-      'Qué es lo más difícil de costear y por qué':Math.random()<.55?pick(frases):'',
-      'Autoriza el uso anónimo de estas respuestas en una publicación periodística':Math.random()<.93?'Sí':'No'
+      'Apoyos que recibe actualmente':recibeApoyo?pick(['Beca o descuento del club o liga','Apoyo del INDER','Apoyo de Indeportes Antioquia o Comité Olímpico','Patrocinio de una empresa','Apoyo de la familia extensa o la comunidad','Beca o descuento del club o liga, Apoyo del INDER']):'Ninguno',
+      'Valor mensual aproximado de esos apoyos':recibeApoyo&&Math.random()<.7?r(rnd(50000,350000)):0,
+      'Valor anual aproximado de esos apoyos':recibeApoyo&&Math.random()<.3?r(rnd(200000,1500000)):0,
+      'Has faltado a entrenamientos o competencias por falta de dinero':est<=2?pick(['Sí, con frecuencia','Sí, alguna vez','Sí, alguna vez','Nunca']):pick(['Sí, alguna vez','Nunca','Nunca']),
+      'Qué tan cerca has estado de abandonar el deporte por costos':Math.max(1,Math.min(5,Math.round(4.4-est*0.45+gauss()*0.9))),
+      'El gasto que más pesa en el presupuesto del deporte que practicas *marca solo un óvalo.':pick(['Mensualidad del club','Transporte','Uniformes e implementos','Uniformes e implementos','Inscripciones a torneos','Viajes por competencias','Alimentación y suplementos','Servicios médicos']),
+      'Qué es lo más difícil de costear del deporte que practicas y por qué':Math.random()<.55?pick(frases):'',
+      'Correo o teléfono para una entrevista':''
     });
   }
   return {cab:Object.keys(filas[0]), filas:filas.map(f=>{const o={};Object.keys(f).forEach(k=>o[k]=String(f[k]));return o;})};
@@ -851,7 +857,7 @@ const fmtDe = v => v.pct ? (x=>fPct(x,1)) : (v.dinero ? corto : (x=>fN(x,1)));
 const fmtLargo = v => v.pct ? (x=>fPct(x,1)) : (v.dinero ? fCOP : (x=>fN(x,1)));
 function agrupables(){
   const g=[['deporte','Deporte'],['comuna','Comuna o corregimiento'],['estrato','Estrato'],
-    ['genero','Género'],['categoria','Categoría'],['escenario','Escenario donde entrena'],
+    ['genero','Sexo'],['categoria','Categoría'],['escenario','Escenario donde entrena'],
     ['tieneApoyo','Recibe apoyo'],['apoyoInder','Apoyo del INDER'],['afiliado','Afiliación a liga'],
     ['falta','Ha faltado por dinero'],['gastoPesa','Gasto que más pesa'],['ingreso','Ingreso del hogar']];
   return g.filter(([k])=> new Set(S.datos.map(d=>d[k]).filter(x=>x&&x!=='—')).size>1);
@@ -896,12 +902,12 @@ function pintarPanorama(){
   const faltaron=d.filter(x=>norm(x.falta).startsWith('si')).length;
 
   $('#lede').innerHTML = `
-    <p class="lede">Sostener a un deportista afiliado en Medellín cuesta una mediana de
+    <p class="lede">Sostener a un gimnasta afiliado en Medellín cuesta una mediana de
       <em>${fCOP(r.mediana)}</em> al año, equivalente a ${fN(r.mediana/smmlv,1)} salarios mínimos mensuales.</p>
     <p>La media es de ${fCOP(r.media)} con una desviación estándar de ${fCOP(r.de)}: el gasto no se
     reparte parejo. La mitad de las familias encuestadas gasta entre ${fCOP(r.q1)} y ${fCOP(r.q3)},
     mientras que el 10 % más costoso supera ${fCOP(cuantil(r.datos,.9))}.
-    ${porDep.length>1?`El deporte más caro de la muestra es ${porDep[0].et} (${fCOP(porDep[0].media)} en promedio) y el más económico ${porDep[porDep.length-1].et} (${fCOP(porDep[porDep.length-1].media)}), una brecha de ${fN(porDep[0].media/porDep[porDep.length-1].media,1)} veces.`:''}
+    ${porDep.length>1?`La modalidad más costosa es ${porDep[0].et} (${fCOP(porDep[0].media)} en promedio) frente a ${porDep[porDep.length-1].et} (${fCOP(porDep[porDep.length-1].media)}), una brecha de ${fN(porDep[0].media/porDep[porDep.length-1].media,1)} veces.`:''}
     ${rc.n?` Para el hogar típico eso representa ${fPct(rc.mediana)} de sus ingresos anuales${criticos?`, y en ${criticos} de ${rc.n} casos supera el 30 %, umbral en el que la práctica deportiva compite con gastos básicos`:''}.`:''}
     ${faltaron?` ${faltaron} de ${d.length} deportistas reportan haber faltado a entrenamientos o competencias por falta de dinero.`:''}</p>`;
 
@@ -1070,6 +1076,7 @@ function pintarDiagnostico(){
   const cargas=d.map(x=>x.carga).filter(x=>x!=null&&isFinite(x));
   const avisos=[];
   if(d.length<30) avisos.push(['mal',`Con ${d.length} respuestas la muestra todavía es exploratoria. Por debajo de 30 casos los promedios se mueven mucho con cada respuesta nueva: úsala para encontrar historias, no para publicar cifras de ciudad.`]);
+  if(S.sinAutorizar) avisos.push(['',`${S.sinAutorizar} respuesta${S.sinAutorizar>1?'s fueron excluidas':' fue excluida'} del análisis porque no autorizó el tratamiento de datos. Las cifras de esta pantalla se calculan solo sobre quienes sí autorizaron.`]);
   if(S.demo) avisos.push(['mal','Estás viendo datos simulados generados por el aplicativo para probar el funcionamiento. Nada de lo que aparece aquí es información real y no puede citarse.']);
   const sinIngreso = d.length - cargas.length;
   if(sinIngreso>d.length*0.3) avisos.push(['',`${sinIngreso} de ${d.length} respuestas no permiten calcular el peso sobre el ingreso porque el hogar prefirió no informarlo. Todos los indicadores de barrera se calculan sobre ${cargas.length} casos.`]);
@@ -1099,7 +1106,7 @@ function pintarDiagnostico(){
   const inder=d.filter(x=>x.apoyoInder==='Con apoyo del INDER').length;
   $('#agenda').innerHTML = `
     <h4>Lo que ya se puede afirmar</h4>
-    <p>${porDep.length?`El costo cambia sustancialmente según el deporte: ${porDep.slice(0,3).map(g=>esc(g.et)+' '+fCOP(g.media)).join(', ')}. `:''}
+    <p>${porDep.length?`El costo cambia sustancialmente según la modalidad: ${porDep.slice(0,3).map(g=>esc(g.et)+' '+fCOP(g.media)).join(', ')}. `:''}
     ${porCarga.length?`Medido como porcentaje del ingreso, la comuna donde el deporte pesa más es ${esc(porCarga[0].et)} (${fPct(porCarga[0].media)}), no necesariamente la que más dinero gasta: ahí está el contraste que da la historia.`:''}</p>
     <h4>Lo que hay que verificar antes de publicar</h4>
     <p>${desiguales.length?`En ${desiguales.map(g=>esc(g.et)).join(', ')} la variación interna es altísima (CV de ${desiguales.map(g=>fN(g.cv,2)).join('; ')}): antes de dar un promedio hay que entender si son clubes distintos, categorías distintas o errores de reporte. `:''}
@@ -1144,10 +1151,10 @@ function construirInforme(){
   const criticos=cargas.filter(c=>c>0.30).length;
   const fecha=new Date().toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'});
 
-  let md = `# Cuánto cuesta ser deportista afiliado en Medellín\n\n`;
+  let md = `# Cuánto cuesta ser gimnasta afiliado a una liga en Medellín\n\n`;
   md += `_Análisis de ${d.length} respuestas · generado el ${fecha}${S.demo?' · DATOS SIMULADOS, NO PUBLICABLES':''}_\n\n`;
   md += `## Hallazgo principal\n\n`;
-  md += `Sostener a un deportista afiliado cuesta una mediana de ${fCOP(r.mediana)} al año, `;
+  md += `Sostener a un gimnasta afiliado cuesta una mediana de ${fCOP(r.mediana)} al año, `;
   md += `equivalente a ${fN(r.mediana/p.smmlv,1)} salarios mínimos mensuales. La media es ${fCOP(r.media)} `;
   md += `(intervalo de confianza del 95 % entre ${fCOP(r.ic[0])} y ${fCOP(r.ic[1])}) con una desviación estándar de ${fCOP(r.de)} `;
   md += `y un coeficiente de variación de ${fN(r.cv,2)}. La mitad de las familias gasta entre ${fCOP(r.q1)} y ${fCOP(r.q3)}; `;
@@ -1163,11 +1170,11 @@ function construirInforme(){
 
   md += `## Diferencias entre grupos\n\n`;
   if(porDep.length>1){
-    md += `**Por deporte.** ${porDep[0].et} encabeza con ${fCOP(porDep[0].media)} anuales en promedio (n = ${porDep[0].n}) `;
+    md += `**Por modalidad.** ${porDep[0].et} encabeza con ${fCOP(porDep[0].media)} anuales en promedio (n = ${porDep[0].n}) `;
     md += `frente a ${fCOP(porDep[porDep.length-1].media)} de ${porDep[porDep.length-1].et}: `;
     md += `una brecha de ${fN(porDep[0].media/(porDep[porDep.length-1].media||1),1)} veces. `;
     const av=anova(porDep.map(g=>g.vals));
-    if(av) md += `El análisis de varianza confirma que las diferencias entre disciplinas ${av.p<0.05?'son estadísticamente significativas':'no alcanzan significancia estadística con la muestra actual'} `
+    if(av) md += `El análisis de varianza confirma que las diferencias entre modalidades ${av.p<0.05?'son estadísticamente significativas':'no alcanzan significancia estadística con la muestra actual'} `
       + `(F(${av.d1}, ${av.d2}) = ${fN(av.F,2)}; p ${av.p<0.001?'< 0,001':'= '+fN(av.p,3)}; eta² = ${fN(av.eta2,2)}).`;
     md += `\n\n`;
   }
@@ -1202,10 +1209,10 @@ function construirInforme(){
     md += `extendido a ${fN(p.pobla,0)} deportistas la política costaría cerca de ${fCOP(ah*p.pobla)} anuales.`;
   }
   md += `\n\n## Ficha metodológica\n\n`;
-  md += `- Instrumento: encuesta autodiligenciada en Google Forms, difundida entre deportistas de Medellín y sus familias.\n`;
+  md += `- Instrumento: encuesta autodiligenciada en Google Forms con autorización de tratamiento de datos (Ley 1581 de 2012), difundida entre gimnastas de Medellín y sus familias.\n`;
   md += `- Unidad de análisis: el deportista.\n`;
-  md += `- Respuestas procesadas: ${d.length}. Fuente del archivo: ${S.fuente}.\n`;
-  md += `- Cobertura: ${new Set(d.map(x=>x.deporte).filter(Boolean)).size} deportes y ${new Set(d.map(x=>x.comuna).filter(Boolean)).size} comunas o corregimientos.\n`;
+  md += `- Respuestas procesadas: ${d.length}${S.sinAutorizar?`, tras excluir ${S.sinAutorizar} que no autorizaron el tratamiento de datos`:''}. Fuente del archivo: ${S.fuente}.\n`;
+  md += `- Cobertura: ${new Set(d.map(x=>x.deporte).filter(Boolean)).size} modalidades y ${new Set(d.map(x=>x.comuna).filter(Boolean)).size} comunas o corregimientos.\n`;
   md += `- Muestreo no probabilístico por conveniencia: los resultados describen a quienes respondieron y no son representativos del universo de deportistas afiliados de la ciudad.\n`;
   md += `- Los ingresos se recogieron en rangos de salarios mínimos y se convirtieron al punto medio de cada rango, con un salario mínimo de ${fCOP(p.smmlv)}.\n`;
   md += `- El costo anual total suma los gastos mensuales multiplicados por doce más los gastos anuales declarados.\n`;
@@ -1279,8 +1286,15 @@ function pintarMapeo(){
   $('#previa').innerHTML = tabla(cols.map(c=>c.length>26?c.slice(0,26)+'…':c),
     S.filas.slice(0,6).map(f=>cols.map(c=>esc(String(f[c]??'').slice(0,32)))));
 }
+function recibirTabla(cab, matriz, fuente){
+  const filas = matriz.map(f=>{ const o={}; cab.forEach((h,i)=> o[h]= f[i]!==undefined ? String(f[i]).trim() : ''); return o; });
+  montar(cab, filas, fuente);
+}
 function recibir(texto, fuente){
   const {cab, filas} = leerCSV(texto);
+  montar(cab, filas, fuente);
+}
+function montar(cab, filas, fuente){
   if(!cab.length || !filas.length){ alert('El archivo no trae filas legibles. Revisa que sea el CSV de respuestas.'); return; }
   S.cab=cab; S.filas=filas; S.fuente=fuente; S.demo=(fuente==='datos simulados');
   S.mapa=autodetectar(cab);
@@ -1318,6 +1332,18 @@ soltar.addEventListener('drop',e=>{
   const f=e.dataTransfer.files[0]; if(!f) return;
   const lector=new FileReader(); lector.onload=()=>recibir(lector.result,f.name); lector.readAsText(f,'UTF-8');
 });
+function cargarJSONP(url){
+  return new Promise((res,rej)=>{
+    const cb='cbHoja'+Date.now();
+    const s=document.createElement('script');
+    const t=setTimeout(()=>{limpiar();rej(new Error('tiempo agotado'));},20000);
+    function limpiar(){ clearTimeout(t); delete window[cb]; if(s.parentNode) s.remove(); }
+    window[cb]=d=>{ limpiar(); res(d); };
+    s.onerror=()=>{ limpiar(); rej(new Error('la dirección no respondió')); };
+    s.src=url+(url.includes('?')?'&':'?')+'callback='+cb+'&t='+Date.now();
+    document.body.appendChild(s);
+  });
+}
 function variantesURL(u){
   const v=[];
   const id=(u.match(/\/spreadsheets\/d\/e\/([\w-]+)/)||[])[1];
@@ -1341,6 +1367,18 @@ $('#btnUrl').onclick=async()=>{
   const msg=$('#msgUrl');
   if(!/docs\.google\.com/.test(u)){ msg.textContent='Ese enlace no es de Hojas de cálculo de Google.'; return; }
   msg.textContent='Descargando…';
+  if(u.includes('script.google.com')){
+    if(!/\/exec/.test(u)){ msg.textContent='Esa dirección debe terminar en /exec. Copia la URL de la implementación, no la del editor.'; return; }
+    try{
+      const d=await cargarJSONP(u);
+      if(d.error){ msg.textContent=d.error; return; }
+      msg.textContent='';
+      recibirTabla(d.cab, d.filas, 'hoja en vivo');
+    }catch(e){
+      msg.textContent='No respondió ('+e.message+'). Revisa que la implementación esté como «Cualquier usuario» y que hayas autorizado los permisos.';
+    }
+    return;
+  }
   let bloqueoRed=false, htmlRecibido=false, ultimo='';
   for(const url of variantesURL(u)){
     try{
@@ -1358,9 +1396,9 @@ $('#btnUrl').onclick=async()=>{
     }
   }
   if(bloqueoRed){
-    msg.innerHTML='El navegador bloqueó la conexión con Google. Pasa si abriste esta página dentro de Claude, '
-      +'donde las conexiones externas están restringidas: descarga el archivo y ábrelo desde tu equipo, '
-      +'o usa el botón de abajo para soltar el CSV directamente.';
+    msg.innerHTML='El navegador bloqueó la conexión con Google. Es una restricción del navegador, no de tu hoja, '
+      +'y no se arregla cambiando opciones en Google. Dos salidas: sube el CSV con el botón de abajo, '
+      +'o instala el script «publicar-respuestas.gs» en la hoja y pega aquí la dirección que termina en /exec.';
   } else if(htmlRecibido){
     msg.innerHTML='Google devolvió una página web en vez de datos. La hoja no está publicada como CSV: '
       +'entra a Archivo › Compartir › Publicar en la web, elige la hoja de respuestas y el formato '
